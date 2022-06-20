@@ -8,7 +8,7 @@ class MovieDataService {
 
     find(query, by="title", page=0) {
         return axios.get(
-            `${process.env.REACT_APP_BASE_URL}/api/v1/movies?${by}=${query}&page=${page}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/v1/movies?${by}=${query}&page=${page}`
         );
     }
 
