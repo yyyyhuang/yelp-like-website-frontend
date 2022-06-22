@@ -97,7 +97,7 @@ const MoviesList = props => {
     }, [currentPage, retrieveNextPage]);
 
 
-    // other functions that re not depended on by useEffect
+    // other functions that are not depended on by useEffect
     const onChangeSearchTtitle = e => {
         const searchTitle = e.target.value;
         setSearchTitle(searchTitle);
