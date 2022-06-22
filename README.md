@@ -1,5 +1,5 @@
 HW 4
-![localhost](localhost3000.jpg)
-![withposter](wPoster.jpg)
-![noposter](noPoster.jpg)
+![localhost](snapshots/localhost3000.jpg)
+![withposter](snapshots/wPoster.jpg)
+![noposter](snapshots/noPoster.jpg)
 
