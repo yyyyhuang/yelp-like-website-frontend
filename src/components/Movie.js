@@ -1,15 +1,17 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useEffect} from "react";
 import MovieDataService from "../services/movies";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/Container";
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import moment from 'moment';
 
 import "./Movie.css";
 
-const Movie = props => {
+const Movie = ({ user }) => {
 
     let params = useParams();
 
@@ -19,8 +21,6 @@ const Movie = props => {
         rated: "",
         reviews: []
     });
-    
-
     
     useEffect(() => {
         const getMovie = id => {
@@ -60,6 +60,10 @@ const Movie = props => {
                             <Card.Text>
                                 {movie?.plot}
                             </Card.Text>
+                            { user &&
+                                <Link to={"/movies/" + params.id + "/review"}>
+                                    Add Review
+                                    </Link> }
                         </Card.Body>
                     </Card>
                     <h2>Reviews</h2>

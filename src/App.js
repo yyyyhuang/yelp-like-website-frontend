@@ -70,7 +70,10 @@ function App() {
           <MoviesList />}
           />
         <Route path={"/movies/:id/"} element={
-          <Movie />}
+          <Movie user={ user }/>}
+          />
+        <Route path={"/movies/:id/review"} element={
+          <AddReview user={ user }/>}
           />
       </Routes>
     </div>
