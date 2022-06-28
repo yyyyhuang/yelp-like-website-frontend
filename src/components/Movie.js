@@ -72,8 +72,48 @@ const Movie = ({ user }) => {
                         return (
                             <div className="d-flex">
                                 <div className="flex-shrink-0 reviewsText">
-                                    <h5>{review.name + "reviewed on"}</h5>
+                                    <h5>{review.name + "reviewed on"} { moment(review.date).format("Do MMMM YYYY") }</h5>
                                     <p className="review">{review.review}</p>
+                                    { user && user.googleId === review.user_id &&
+                                        <Row>
+                                            <Col>
+                                                <Link to={{
+                                                    pathname:"/movies/"+params.id+"/review"
+                                                }}
+                                                state = {{
+                                                    currentReview : review
+                                                }} >
+                                                    Edit
+                                                </Link>
+                                            </Col>
+                                            <Col>
+                                                <Button variant="link" onClick={ () =>
+                                                {
+                                                    // TODO: IMPLEMENT DELETE BEHAVIOR
+                                                    var data = {
+                                                        review_id: review._id,
+                                                        name: review.name,
+                                                        user_Id: review.user_id
+                                                    }
+                                                    MovieDataService.deleteReview(data)
+                                                        .then(response => {
+                                                            setMovie((prevState) => {
+                                                                prevState.reviews.splice(index, 1);
+                                                                return ({
+                                                                  ...prevState
+                                                                })
+                                                              })
+                                                        })
+                                                        .catch(e => {
+                                                            console.log(e)
+                                                        })
+                                                    
+                                                }}>
+                                                    Delete
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    }
                                 </div>
                             </div>
                         )

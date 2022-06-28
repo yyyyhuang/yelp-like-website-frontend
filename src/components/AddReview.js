@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import MovieDataService from "../services/movies";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/esm/Container';
+import Movie from './Movie';
 
 const AddReview = ({ user }) => {
     const navigate = useNavigate();
     let params = useParams;
+    let location = useLocation();
 
     let editing = false;
     let initialReviewState = "";
@@ -26,12 +28,21 @@ const AddReview = ({ user }) => {
             review: review,
             name: user.name,
             user_id: user.googleId,
-            movie_id: params.id
+            movie_id: params.id // get movie id from url
         }
 
         if (editing) {
             // TODO: handle case where an existing
             // review is being updated
+            data = {...data, review_id: user.review_id};
+            MovieDataService.updateReview(data)
+                .then(response => {
+                    setReview(location.state.currentReview);
+                    console.log(location.state.currentReview);
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         } else {
             MovieDataService.createReview(data)
                 .then(response => {
@@ -43,5 +54,26 @@ const AddReview = ({ user }) => {
         }
     }
 
-    return ()
+    return (
+        <Container className="main-container">
+            <Form>
+                <Form.Group className='mb-3'>
+                    <Form.Label>{ editing ? "Edit" : "Create" } Review</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        type="text"
+                        required
+                        review={ review }
+                        onChange={ onChangeReview }
+                        defaultValue={ editing ? null : ""}
+                        />
+                </Form.Group>
+                <Button variant='primary' onClick={ saveReview }>
+                    Submit
+                </Button>
+            </Form>
+        </Container>
+    )
 }
+
+export default AddReview;

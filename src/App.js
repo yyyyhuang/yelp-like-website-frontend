@@ -12,6 +12,7 @@ import MoviesList from "./components/MoviesList";
 import Movie from "./components/Movie";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
+import AddReview from './components/AddReview';
 
 import './App.css';
 
