@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import AddReview from "./AddReview";
 import moment from 'moment';
 
 import "./Movie.css";
@@ -27,7 +28,7 @@ const Movie = ({ user }) => {
                 MovieDataService.findId(id)
                     .then(response => {
                         setMovie(response.data);
-                        console.log(response.data)
+                        // console.log(response.data)
                     })
                     .catch(e => {
                         console.log(e);
@@ -35,6 +36,28 @@ const Movie = ({ user }) => {
         }
         getMovie(params.id)
     }, [params.id]);
+
+    const deleteReview = (reviewId, index) => {
+
+        var data = {
+            user_id: user.googleId,
+            review_id: reviewId
+        }
+        
+        MovieDataService.deleteReview(data)
+            .then(response => {
+                console.log("data:"+data)
+                setMovie((prevState) => {
+                    prevState.reviews.splice(index, 1);
+                    return ({
+                      ...prevState
+                    })
+                  })
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
 
 
     return (
@@ -72,41 +95,25 @@ const Movie = ({ user }) => {
                         return (
                             <div className="d-flex">
                                 <div className="flex-shrink-0 reviewsText">
-                                    <h5>{review.name + "reviewed on"} { moment(review.date).format("Do MMMM YYYY") }</h5>
+                                    <h5>{review.name + " reviewed on"} { moment(review.date).format("Do MMMM YYYY") }</h5>
                                     <p className="review">{review.review}</p>
                                     { user && user.googleId === review.user_id &&
                                         <Row>
                                             <Col>
-                                                <Link to={{
-                                                    pathname:"/movies/"+params.id+"/review"
-                                                }}
-                                                state = {{
-                                                    currentReview : review
-                                                }} >
-                                                    Edit
-                                                </Link>
+                                            <Link to={{
+                                                pathname: "/movies/" + params.id + "/review"
+                                            }}
+                                            state = {{
+                                                currentReview: review
+                                            }} >
+                                                Edit
+                                            </Link>
                                             </Col>
                                             <Col>
                                                 <Button variant="link" onClick={ () =>
                                                 {
                                                     // TODO: IMPLEMENT DELETE BEHAVIOR
-                                                    var data = {
-                                                        review_id: review._id,
-                                                        name: review.name,
-                                                        user_Id: review.user_id
-                                                    }
-                                                    MovieDataService.deleteReview(data)
-                                                        .then(response => {
-                                                            setMovie((prevState) => {
-                                                                prevState.reviews.splice(index, 1);
-                                                                return ({
-                                                                  ...prevState
-                                                                })
-                                                              })
-                                                        })
-                                                        .catch(e => {
-                                                            console.log(e)
-                                                        })
+                                                    deleteReview(review._id, index)
                                                     
                                                 }}>
                                                     Delete

@@ -8,13 +8,18 @@ import Movie from './Movie';
 
 const AddReview = ({ user }) => {
     const navigate = useNavigate();
-    let params = useParams;
+    let params = useParams();
     let location = useLocation();
 
     let editing = false;
     let initialReviewState = "";
     // initialReviewState will have a different value
     // if we are editing an existing review
+
+    if (location.state !== null) {
+        editing = true;
+        initialReviewState=location.state.currentReview.review;
+    }
 
     const [review,  setReview] = useState(initialReviewState);
 
@@ -34,10 +39,10 @@ const AddReview = ({ user }) => {
         if (editing) {
             // TODO: handle case where an existing
             // review is being updated
-            data = {...data, review_id: user.review_id};
+            data = {...data, review_id: location.state.currentReview._id};
             MovieDataService.updateReview(data)
                 .then(response => {
-                    setReview(location.state.currentReview);
+                    navigate("/movies/"+params.id);
                     console.log(location.state.currentReview);
                 })
                 .catch(e => {
@@ -47,6 +52,8 @@ const AddReview = ({ user }) => {
             MovieDataService.createReview(data)
                 .then(response => {
                     navigate("/movies/"+params.id)
+                    editing = true;
+                    console.log(editing)
                 })
                 .catch(e => {
                     console.log(e)
@@ -65,7 +72,7 @@ const AddReview = ({ user }) => {
                         required
                         review={ review }
                         onChange={ onChangeReview }
-                        defaultValue={ editing ? null : ""}
+                        defaultValue={ editing ? initialReviewState : ""}
                         />
                 </Form.Group>
                 <Button variant='primary' onClick={ saveReview }>

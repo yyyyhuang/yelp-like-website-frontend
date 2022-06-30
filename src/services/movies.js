@@ -33,8 +33,7 @@ class MovieDataService {
     }
 
     deleteReview(data) {
-        return axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/review`, { data : data});
+        return axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/review`, {data});
     }
 }
-
 export default new MovieDataService();
