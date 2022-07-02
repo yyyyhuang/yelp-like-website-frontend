@@ -1,3 +1,7 @@
+hw6
+![starts](snapshots/stars.jpg)
+![dbStarts](snapshots/dbStars.jpg)
+
 hw 5
 ![review](snapshots/review.jpg)
 ![edit](snapshots/edit.jpg)
