@@ -170,7 +170,7 @@ const MoviesList = ({
                                 <Card className="moviesListCard">
                                     { user && (
                                         favorites.includes(movie._id) ?
-                                        <BsStarFill style={{ position: 'absolute', top: 0, left: 0, color: 'yellow'}} className="star StarFill" onClick={() => {
+                                        <BsStarFill style={{ position: 'absolute', top: 0, left: 0}} className="star starFill" onClick={() => {
                                         deleteFavorite(movie._id);
                                         }} />
                                         :
