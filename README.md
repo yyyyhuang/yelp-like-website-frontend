@@ -1,6 +1,6 @@
 hw6
 ![starts](snapshots/stars.jpg)
-![dbStarts](snapshots/dbStars.jpg)
+![dbStars](snapshots/dbStarts.jpg)
 
 hw 5
 ![review](snapshots/review.jpg)
