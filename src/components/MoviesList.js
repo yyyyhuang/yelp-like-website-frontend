@@ -7,11 +7,18 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from "react-bootstrap/Container";
 import Card from 'react-bootstrap/Card';
+import { BsStar, BsStarFill } from "react-icons/bs";
+
 
 import "./MoviesList.css";
 
 
-const MoviesList = props => {
+const MoviesList = ({
+    user,
+    favorites,
+    addFavorite,
+    deleteFavorite
+}) => {
     // useState to set state values
     const [movies, setMovies] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
     const [searchTitle, setSearchTitle] = useState("");
@@ -161,6 +168,16 @@ const MoviesList = props => {
                         return(
                             <Col key={movie._id}>
                                 <Card className="moviesListCard">
+                                    { user && (
+                                        favorites.includes(movie._id) ?
+                                        <BsStarFill style={{ position: 'absolute', top: 0, left: 0, color: 'yellow'}} className="star StarFill" onClick={() => {
+                                        deleteFavorite(movie._id);
+                                        }} />
+                                        :
+                                        <BsStar style={{ position: 'absolute', top: 0, left: 0}} className="star starEmpty" onClick={() => {
+                                            addFavorite(movie._id);
+                                        }} />
+                                    )}
                                     <Card.Img
                                     className="smallPoster"
                                     src={movie.poster+"/100px180"}

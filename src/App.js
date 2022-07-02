@@ -6,8 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from "react-bootstrap/Navbar";
 
-
-
 import MoviesList from "./components/MoviesList";
 import Movie from "./components/Movie";
 import Login from "./components/Login";
@@ -21,6 +19,15 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
 
   const [user, setUser] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+
+  const addFavorite = (movieId) => {
+    setFavorites([...favorites, movieId])
+  }
+
+  const deleteFavorite = (movieId) => {
+    setFavorites(favorites.filter(f => f !== movieId));
+  }
 
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
@@ -65,10 +72,20 @@ function App() {
 
       <Routes>
         <Route exact path={"/"} element={
-          <MoviesList />}
+          <MoviesList 
+            user={ user }
+            addFavorite={ addFavorite }
+            deleteFavorite={ deleteFavorite }
+            favorites={ favorites }
+          />}
           />
         <Route exact path={"/movies"} element={
-          <MoviesList />}
+          <MoviesList 
+            user={ user }
+            addFavorite={ addFavorite }
+            deleteFavorite={ deleteFavorite }
+            favorites={ favorites }
+          />}
           />
         <Route path={"/movies/:id/"} element={
           <Movie user={ user }/>}
