@@ -6,7 +6,7 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;;
 
 function Login({ setUser }) {
     const onSuccess = (res) => {
-        console.log('Login Suceess: currentUser:', res);
+        // console.log('Login Suceess: currentUser:', res);
         var tokenData = jwt_decode(res.credential);
         var loginData = {
             googleId: tokenData.sub,

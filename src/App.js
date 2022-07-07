@@ -21,17 +21,19 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
-
-  let reload = true;
+  const [saveFavorites, setSaveFavorites] = useState(false);
+  //let reload = true;
 
   const addFavorite = (movieId) => {
+    setSaveFavorites(true);
     setFavorites([...favorites, movieId])
   }
 
   const deleteFavorite = (movieId) => {
+    setSaveFavorites(true);
     setFavorites(favorites.filter(f => f !== movieId));
   }
-
+  // *********************************** check with answer  **************
   const retrieveFavorites = useCallback(() => {
     FavoriteDataService.getFavorites(user.googleId)
       .then(response => {
@@ -51,21 +53,22 @@ function App() {
       .catch(e => {
         console.log(e);
       })
-  }, [favorites])
+  }, [favorites, user])
 
   useEffect(() => {
-    if (reload && user) {
+    if (saveFavorites && user) {
       updateFavorites();
-      reload = false;
+      setSaveFavorites(false);
+      //reload = false;
     }
-  }, [favorites])
+  }, [user, favorites, updateFavorites, saveFavorites]);
 
   useEffect(() => {
     if (user) {
       retrieveFavorites();
     }
-  }, [user])
-
+  }, [user, retrieveFavorites]);
+// ************************************************************************
 
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
