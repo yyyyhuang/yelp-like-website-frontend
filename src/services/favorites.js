@@ -10,4 +10,4 @@ class FavoriteDataService {
     }
 }
 
-export default new FavoriteDataService;
+export default new FavoriteDataService();

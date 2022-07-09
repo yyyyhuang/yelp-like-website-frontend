@@ -7,7 +7,6 @@ import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-import AddReview from "./AddReview";
 import moment from 'moment';
 
 import "./Movie.css";
