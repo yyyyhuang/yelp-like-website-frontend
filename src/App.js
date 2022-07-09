@@ -33,7 +33,7 @@ function App() {
     setSaveFavorites(true);
     setFavorites(favorites.filter(f => f !== movieId));
   }
-  // *********************************** check with answer  **************
+
   const retrieveFavorites = useCallback(() => {
     FavoriteDataService.getFavorites(user.googleId)
       .then(response => {
@@ -68,7 +68,7 @@ function App() {
       retrieveFavorites();
     }
   }, [user, retrieveFavorites]);
-// ************************************************************************
+
 
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
