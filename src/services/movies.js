@@ -19,6 +19,9 @@ class MovieDataService {
         );
     }
 
+    findIds(ids){
+        return Promise.all(ids.map(id=>this.findId(id)));
+    }
 
     getRatings() {
         return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/ratings`);

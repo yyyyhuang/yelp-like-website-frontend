@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from "react-bootstrap/Navbar";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import MoviesList from "./components/MoviesList";
 import Movie from "./components/Movie";
@@ -12,6 +14,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import AddReview from './components/AddReview';
 import FavoriteDataService from './services/favorites';
+import FavoritesList from './components/FavoritesList';
 
 import './App.css';
 
@@ -22,8 +25,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [saveFavorites, setSaveFavorites] = useState(false);
-  //let reload = true;
-
+  
   const addFavorite = (movieId) => {
     setSaveFavorites(true);
     setFavorites([...favorites, movieId])
@@ -105,6 +107,11 @@ function App() {
             <Nav.Link as={Link}  to={"/movies"}>
               Movies
             </Nav.Link>
+            { user &&
+              <Nav.Link as={Link} to={"/favorites"}>
+                  Favorites
+              </Nav.Link> 
+            }
           </Nav>
         </Navbar.Collapse>
         { user ? (
@@ -138,7 +145,28 @@ function App() {
         <Route path={"/movies/:id/review"} element={
           <AddReview user={ user }/>}
           />
+        
+        {/* favorites drogging page */}
+        <Route exact path={"/favorites"} element={
+          user?
+
+          <DndProvider backend={HTML5Backend}>
+              <FavoritesList 
+                  favorites={ favorites }
+                        />
+				  </DndProvider>
+          :
+          <MoviesList
+            user={ user }
+            addFavorite={ addFavorite }
+            deleteFavorite={ deleteFavorite }
+            favorites={ favorites }
+          />
+        
+        }
+        />
       </Routes>
+
     </div>
     </GoogleOAuthProvider>
   );
