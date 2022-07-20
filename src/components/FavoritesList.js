@@ -55,7 +55,7 @@ const FavoritesList =({
     }, [])
     
     return (
-        <div className='App'>
+        <div >
             <Container className='favoritesContainer'>
                 <div className='favoritesPanel'>
                 {
@@ -68,7 +68,7 @@ const FavoritesList =({
             
             {
                 moviesFav.length>0 ? 
-                <div>{moviesFav.map((movie, i) => {return renderCard(movie, i)})}</div> 
+                <div style={{width:500, margin:16}}>{moviesFav.map((movie, i) => {return renderCard(movie, i)})}</div> 
                 : 
                 <div></div>
             }
