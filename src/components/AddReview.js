@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MovieDataService from "../services/movies";
+import RestaurantDataService from "../services/restaurants";
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -39,7 +39,7 @@ const AddReview = ({ user }) => {
             // TODO: handle case where an existing
             // review is being updated
             data = {...data, review_id: location.state.currentReview._id};
-            MovieDataService.updateReview(data)
+            RestaurantDataService.updateReview(data)
                 .then(response => {
                     navigate("/movies/"+params.id);
                     console.log(location.state.currentReview);
@@ -48,7 +48,7 @@ const AddReview = ({ user }) => {
                     console.log(e)
                 })
         } else {
-            MovieDataService.createReview(data)
+            RestaurantDataService.createReview(data)
                 .then(response => {
                     navigate("/movies/"+params.id)
                     editing = true;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback} from "react";
-import MovieDataService from "../services/movies";
+import RestaurantDataService from "../services/restaurants";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
@@ -32,7 +32,7 @@ const MoviesList = ({
     // only be created once and will be dependencies for
     // useEffect
     const retrieveRatings = useCallback(() => {
-        MovieDataService.getRatings() // calls getRatings to get a l ist of possible ratings
+        RestaurantDataService.getRatings() // calls getRatings to get a l ist of possible ratings
             .then(response => {
                 setRatings(["All Ratings"].concat(response.data))
             })
@@ -43,7 +43,7 @@ const MoviesList = ({
 
     const retrieveMovies = useCallback(() => {
         setCurrentSearchMode("");
-        MovieDataService.getAll(currentPage)
+        RestaurantDataService.getAll(currentPage)
             .then(response => {
                 setMovies(response.data.movies);
                 setCurrentPage(response.data.page);
@@ -55,7 +55,7 @@ const MoviesList = ({
     }, [currentPage]); // dependency currentPage which determines which set of 20 movies it will retrieve
 
     const find = useCallback((query, by) => {
-        MovieDataService.find(query, by, currentPage)
+        RestaurantDataService.find(query, by, currentPage)
             .then(response => {
                 setMovies(response.data.movies);
             })
@@ -115,6 +115,8 @@ const MoviesList = ({
         setSearchRating(searchRating);
     }
 
+
+
     return (
         <div className="App">
             <Container className="main-container">
@@ -162,7 +164,8 @@ const MoviesList = ({
                         </Button>
                         </Col>
                     </Row>
-                </Form>
+                </Form> 
+                
                 <Row className="movieRow">
                     { movies.map((movie) => {
                         return(

@@ -2,7 +2,7 @@ import update from 'immutability-helper'
 import { useCallback, useEffect, useState } from "react"
 import { Container } from 'react-bootstrap'
 import { DndCard } from "./DndCard"
-import MovieDataService from "../services/movies";
+import RestaurantDataService from "../services/restaurants";
 
 import "./favorites.css"
 
@@ -14,7 +14,7 @@ const FavoritesList =({
 
     const getMovieInfo = useCallback((ids)=>{
       if(ids && ids.length>0){
-        MovieDataService.findIds(ids)
+        RestaurantDataService.findIds(ids)
         .then(response=>{
           let get_movies = response.map(res=>res.data);
           setMoviesFav(get_movies)

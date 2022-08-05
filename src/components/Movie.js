@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import MovieDataService from "../services/movies";
+import RestaurantDataService from "../services/restaurants";
 import { Link, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/Container";
@@ -24,7 +24,7 @@ const Movie = ({ user }) => {
     
     useEffect(() => {
         const getMovie = id => {
-                MovieDataService.findId(id)
+                RestaurantDataService.findId(id)
                     .then(response => {
                         setMovie(response.data);
                         // console.log(response.data)
@@ -43,7 +43,7 @@ const Movie = ({ user }) => {
             review_id: reviewId
         }
         
-        MovieDataService.deleteReview(data)
+        RestaurantDataService.deleteReview(data)
             .then(response => {
                 console.log("data:"+data)
                 setMovie((prevState) => {
