@@ -1,5 +1,5 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useState, useCallback, useEffect, Children } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from 'react-bootstrap/Container';
@@ -27,14 +27,14 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [saveFavorites, setSaveFavorites] = useState(false);
   
-  const addFavorite = (movieId) => {
+  const addFavorite = (businessId) => {
     setSaveFavorites(true);
-    setFavorites([...favorites, movieId])
+    setFavorites([...favorites, businessId])
   }
 
-  const deleteFavorite = (movieId) => {
+  const deleteFavorite = (businessId) => {
     setSaveFavorites(true);
-    setFavorites(favorites.filter(f => f !== movieId));
+    setFavorites(favorites.filter(f => f !== businessId));
   }
 
   const retrieveFavorites = useCallback(() => {

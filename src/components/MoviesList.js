@@ -20,9 +20,9 @@ const MoviesList = ({
     deleteFavorite
 }) => {
     // useState to set state values
-    const [movies, setMovies] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
-    const [searchTitle, setSearchTitle] = useState("");
-    const [searchRating, setSearchRating] = useState("");
+    const [restaurants, setRestaurants] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
+    const [searchName, setsearchName] = useState("");
+    // const [searchRating, setSearchRating] = useState("");
     const [ratings, setRatings] = useState(["All Ratings"]);
     const [currentPage, setCurrentPage] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(0);
@@ -31,6 +31,7 @@ const MoviesList = ({
     // useCallback to define functions which should
     // only be created once and will be dependencies for
     // useEffect
+    /* 
     const retrieveRatings = useCallback(() => {
         RestaurantDataService.getRatings() // calls getRatings to get a l ist of possible ratings
             .then(response => {
@@ -40,12 +41,13 @@ const MoviesList = ({
                 console.log(e);
             });
     }, []); // empty array passed as the second argument of useCallback indicates that this function does not have any dependencies
+    */
 
-    const retrieveMovies = useCallback(() => {
+    const retrieveRestaurants = useCallback(() => {
         setCurrentSearchMode("");
         RestaurantDataService.getAll(currentPage)
             .then(response => {
-                setMovies(response.data.movies);
+                setRestaurants(response.data.restaurants);
                 setCurrentPage(response.data.page);
                 setEntriesPerPage(response.data.entries_per_page);
             })
@@ -57,42 +59,42 @@ const MoviesList = ({
     const find = useCallback((query, by) => {
         RestaurantDataService.find(query, by, currentPage)
             .then(response => {
-                setMovies(response.data.movies);
+                setRestaurants(response.data.restaurants);
             })
             .catch(e => {
                 console.log(e);
             });
     }, [currentPage]);
 
-    const findByTitle = useCallback(() => {
-        setCurrentSearchMode("findByTitle");
-        find(searchTitle, "title");
-    }, [find, searchTitle]);
+    const findByName = useCallback(() => {
+        setCurrentSearchMode("findByName");
+        find(searchName, "title");
+    }, [find, searchName]);
 
-    const findByRating = useCallback(() => {
-        setCurrentSearchMode("findByRating");
-        if (searchRating === "All Ratings") {
-            retrieveMovies();
-        } else {
-            find(searchRating, "rated");
-        }
-    }, [find, searchRating, retrieveMovies]);
+    // const findByRating = useCallback(() => {
+    //     setCurrentSearchMode("findByRating");
+    //     if (searchRating === "All Ratings") {
+    //         retrieveRestaurants();
+    //     } else {
+    //         find(searchRating, "rated");
+    //     }
+    // }, [find, searchRating, retrieveRestaurants]);
 
     const retrieveNextPage = useCallback(() => {
-        if (currentSearchMode === "findByTitle") {
-            findByTitle();
-        } else if (currentSearchMode === "findByRating") {
-            findByRating();
+        if (currentSearchMode === "findByName") {
+            findByName();
+        // } else if (currentSearchMode === "findByRating") {
+        //     findByRating();
         } else {
-            retrieveMovies();
+            retrieveRestaurants();
         }
-    }, [currentSearchMode, findByTitle, findByRating, retrieveMovies]);
+    }, [currentSearchMode, findByName, findByRating, retrieveRestaurants]);
 
 
     // use effect to carry out side effect functionality
-    useEffect(() => {
-        retrieveRatings();
-    }, [retrieveRatings]);
+    // useEffect(() => {
+    //     retrieveRatings();
+    // }, [retrieveRatings]);
 
     useEffect(() => {
         setCurrentPage(0);
@@ -105,15 +107,15 @@ const MoviesList = ({
 
 
     // other functions that are not depended on by useEffect
-    const onChangeSearchTtitle = e => {
-        const searchTitle = e.target.value;
-        setSearchTitle(searchTitle);
+    const onChangeSearchName = e => {
+        const searchName = e.target.value;
+        setsearchName(searchName);
     }
 
-    const onChangeSearchRating = e => {
-        const searchRating = e.target.value;
-        setSearchRating(searchRating);
-    }
+    // const onChangeSearchRating = e => {
+    //     const searchRating = e.target.value;
+    //     setSearchRating(searchRating);
+    // }
 
 
 
@@ -127,19 +129,20 @@ const MoviesList = ({
                             <Form.Control
                             type="text"
                             placeholder="Search by title"
-                            value={searchTitle}
-                            onChange={onChangeSearchTtitle}
+                            value={searchName}
+                            onChange={onChangeSearchName}
                             />
                         </Form.Group>
                         <Button
                             variant="primary"
                             type="button"
-                            onClick={findByTitle}
+                            onClick={findByName}
                         >
                             Search
                         </Button>
                         </Col>
-                        <Col>
+                        {/*
+                        <Col> 
                         <Form.Group className="mb-3">
                             <Form.Control
                                 as="select"
@@ -163,41 +166,39 @@ const MoviesList = ({
                             Search
                         </Button>
                         </Col>
+                        */}
                     </Row>
                 </Form> 
                 
                 <Row className="movieRow">
-                    { movies.map((movie) => {
+                    { restaurants.map((restaurant) => {
                         return(
-                            <Col key={movie._id}>
+                            <Col key={restaurant.business_id}>
                                 <Card className="moviesListCard">
                                     { user && (
-                                        favorites.includes(movie._id) ?
+                                        favorites.includes(restaurant.business_id) ?
                                         <BsStarFill style={{ position: 'absolute', top: 0, left: 0}} className="star starFill" onClick={() => {
-                                        deleteFavorite(movie._id);
+                                        deleteFavorite(restaurant.business_id);
                                         }} />
                                         :
                                         <BsStar style={{ position: 'absolute', top: 0, left: 0}} className="star starEmpty" onClick={() => {
-                                            addFavorite(movie._id);
+                                            addFavorite(restaurant.business_id);
                                         }} />
                                     )}
                                     <Card.Img
                                     className="smallPoster"
-                                    src={movie.poster+"/100px180"}
+                                    src="/images/RestaurantSample.jpg"
                                     onError={({ currentTarget }) => {
                                         currentTarget.onerror = null; // prevents looping
                                         currentTarget.src="/images/NoPosterAvailable-crop.jpg";
                                     }}
                                     />
                                     <Card.Body>
-                                        <Card.Title> {movie.title} </Card.Title>
+                                        <Card.Title> {restaurant.name} </Card.Title>
                                         <Card.Text>
-                                            Rating: {movie.rated}
+                                            Stars: {restaurant.stars}
                                         </Card.Text>
-                                        <Card.Text>
-                                            {movie.plot}
-                                        </Card.Text>
-                                        <Link to={"/movies/"+movie._id}>
+                                        <Link to={"/restaurants/"+restaurant.business_id}>
                                             View Reviews
                                         </Link>
                                     </Card.Body>
