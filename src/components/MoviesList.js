@@ -65,7 +65,7 @@ const MoviesList = ({
 
     const findByName = useCallback(() => {
         setCurrentSearchMode("findByName");
-        find(searchName, "title");
+        find(searchName, "name");
     }, [find, searchName]);
 
     // const findByRating = useCallback(() => {
@@ -125,7 +125,7 @@ const MoviesList = ({
                         <Form.Group className="mb-3">
                             <Form.Control
                             type="text"
-                            placeholder="Search by title"
+                            placeholder="Search by name"
                             value={searchName}
                             onChange={onChangeSearchName}
                             />
