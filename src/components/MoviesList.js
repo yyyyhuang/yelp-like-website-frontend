@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useCallback} from "react";
 import RestaurantDataService from "../services/restaurants";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from "react-bootstrap/Container";
 import Card from 'react-bootstrap/Card';
-import { BsStar, BsStarFill } from "react-icons/bs";
+// import { BsStar, BsStarFill } from "react-icons/bs";
 
 
 import "./MoviesList.css";
 
 
 const MoviesList = ({
-    user,
-    favorites,
-    addFavorite,
-    deleteFavorite
+    user
 }) => {
     // useState to set state values
     const [restaurants, setRestaurants] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
     const [searchName, setsearchName] = useState("");
     // const [searchRating, setSearchRating] = useState("");
-    const [ratings, setRatings] = useState(["All Ratings"]);
+    // const [ratings, setRatings] = useState(["All Ratings"]);
     const [currentPage, setCurrentPage] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(0);
     const [currentSearchMode, setCurrentSearchMode] = useState("");
@@ -175,7 +172,7 @@ const MoviesList = ({
                         return(
                             <Col key={restaurant.business_id}>
                                 <Card className="moviesListCard">
-                                    { user && (
+                                    {/* user && (
                                         favorites.includes(restaurant.business_id) ?
                                         <BsStarFill style={{ position: 'absolute', top: 0, left: 0}} className="star starFill" onClick={() => {
                                         deleteFavorite(restaurant.business_id);
@@ -184,7 +181,7 @@ const MoviesList = ({
                                         <BsStar style={{ position: 'absolute', top: 0, left: 0}} className="star starEmpty" onClick={() => {
                                             addFavorite(restaurant.business_id);
                                         }} />
-                                    )}
+                                    )*/}
                                     <Card.Img
                                     className="smallPoster"
                                     src="/images/RestaurantSample.jpg"

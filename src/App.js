@@ -24,6 +24,7 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
 
   const [user, setUser] = useState(null);
+  /*
   const [favorites, setFavorites] = useState([]);
   const [saveFavorites, setSaveFavorites] = useState(false);
   
@@ -72,7 +73,7 @@ function App() {
     }
   }, [user, retrieveFavorites]);
 
-
+  */
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
     // console.log(loginData);
@@ -164,17 +165,17 @@ function App() {
         <Route exact path={"/"} element={
            <MoviesList 
             user={ user }
-            addFavorite={ addFavorite }
-            deleteFavorite={ deleteFavorite }
-            favorites={ favorites }
+            // addFavorite={ addFavorite }
+            // deleteFavorite={ deleteFavorite }
+            // favorites={ favorites }
           />}
           /> 
         <Route exact path={"/restaurants"} element={
           <MoviesList 
             user={ user }
-            addFavorite={ addFavorite }
-            deleteFavorite={ deleteFavorite }
-            favorites={ favorites }
+            // addFavorite={ addFavorite }
+            // deleteFavorite={ deleteFavorite }
+            // favorites={ favorites }
           />}
           />
         <Route path={"/restaurants/:id/"} element={
@@ -184,7 +185,7 @@ function App() {
           <AddReview user={ user }/>}
           />
         
-        {/* favorites drogging page */}
+        {/* favorites drogging page 
         <Route exact path={"/favorites"} element={
           user?
 
@@ -196,11 +197,11 @@ function App() {
           :
           <MoviesList
             user={ user }
-            addFavorite={ addFavorite }
-            deleteFavorite={ deleteFavorite }
-            favorites={ favorites }
+            // addFavorite={ addFavorite }
+            // deleteFavorite={ deleteFavorite }
+            // favorites={ favorites }
           />
-        
+        */}
         }
         />
       </Routes>
