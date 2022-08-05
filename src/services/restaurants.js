@@ -1,20 +1,20 @@
 import axios from "axios";
 
-class MovieDataService {
+class RestaurantDataService {
     // use get axios to make get request to the api on the back end
     getAll(page = 0) {
-        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies?page=${page}`);
+        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants?page=${page}`);
     }
 
-    find(query, by="title", page=0) {
+    find(query, by="name", page=0) {
         return axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/movies?${by}=${query}&page=${page}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants?${by}=${query}&page=${page}`
         );
     }
 
     findId(id) {
         return axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/id/${id}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/id/${id}`
             
         );
     }
@@ -39,4 +39,4 @@ class MovieDataService {
         return axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/movies/review`, {data});
     }
 }
-export default new MovieDataService();
+export default new RestaurantDataService();
