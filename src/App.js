@@ -169,7 +169,7 @@ function App() {
             favorites={ favorites }
           />}
           /> 
-        <Route exact path={"/movies"} element={
+        <Route exact path={"/restaurants"} element={
           <MoviesList 
             user={ user }
             addFavorite={ addFavorite }
@@ -177,10 +177,10 @@ function App() {
             favorites={ favorites }
           />}
           />
-        <Route path={"/movies/:id/"} element={
+        <Route path={"/restaurants/:id/"} element={
           <Movie user={ user }/>}
           />
-        <Route path={"/movies/:id/review"} element={
+        <Route path={"/restaurants/:id/review"} element={
           <AddReview user={ user }/>}
           />
         

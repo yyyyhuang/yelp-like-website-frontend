@@ -88,7 +88,7 @@ const MoviesList = ({
         } else {
             retrieveRestaurants();
         }
-    }, [currentSearchMode, findByName, findByRating, retrieveRestaurants]);
+    }, [currentSearchMode, findByName, retrieveRestaurants]);
 
 
     // use effect to carry out side effect functionality
@@ -198,9 +198,9 @@ const MoviesList = ({
                                         <Card.Text>
                                             Stars: {restaurant.stars}
                                         </Card.Text>
-                                        <Link to={"/restaurants/"+restaurant.business_id}>
+                                        {/*<Link to={"/restaurants/"+restaurant.business_id}>
                                             View Reviews
-                                        </Link>
+                                        </Link>*/}
                                     </Card.Body>
                                 </Card>
                             </Col>
