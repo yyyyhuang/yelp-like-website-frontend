@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Container from "react-bootstrap/Container";
 import Card from 'react-bootstrap/Card';
 // import { BsStar, BsStarFill } from "react-icons/bs";
+import ReactStars from "react-rating-stars-component";
 
 
 import "./MoviesList.css";
@@ -54,6 +55,7 @@ const MoviesList = ({
     }, [currentPage]); // dependency currentPage which determines which set of 20 movies it will retrieve
 
     const find = useCallback((query, by) => {
+        console.log(query);
         RestaurantDataService.find(query, by, currentPage)
             .then(response => {
                 setRestaurants(response.data.restaurants);
@@ -65,7 +67,7 @@ const MoviesList = ({
 
     const findByName = useCallback(() => {
         setCurrentSearchMode("findByName");
-        find(searchName, "title");
+        find(searchName, "name");
     }, [find, searchName]);
 
     // const findByRating = useCallback(() => {
@@ -114,8 +116,6 @@ const MoviesList = ({
     //     setSearchRating(searchRating);
     // }
 
-
-
     return (
         <div className="App">
             <Container className="main-container">
@@ -125,7 +125,7 @@ const MoviesList = ({
                         <Form.Group className="mb-3">
                             <Form.Control
                             type="text"
-                            placeholder="Search by title"
+                            placeholder="Search by name"
                             value={searchName}
                             onChange={onChangeSearchName}
                             />
@@ -169,6 +169,7 @@ const MoviesList = ({
                 
                 <Row className="movieRow">
                     { restaurants.map((restaurant) => {
+                        // const starList = Array.apply(1, Array(restaurant.stars));
                         return(
                             <Col key={restaurant.business_id}>
                                 <Card className="moviesListCard">
@@ -193,7 +194,13 @@ const MoviesList = ({
                                     <Card.Body>
                                         <Card.Title> {restaurant.name} </Card.Title>
                                         <Card.Text>
-                                            Stars: {restaurant.stars}
+                                             {/*{starList.map((star)=>{<BsStarFill className="star starFill"/>})}*/}
+                                            <ReactStars
+                                                size={30}
+                                                value={restaurant.stars}
+                                                isHalf={true}
+                                                edit={false}
+                                                />
                                         </Card.Text>
                                         {/*<Link to={"/restaurants/"+restaurant.business_id}>
                                             View Reviews

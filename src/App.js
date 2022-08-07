@@ -9,7 +9,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import MoviesList from "./components/MoviesList";
-import Movie from "./components/Movie";
+import Movie from "./components/Restaurant";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import AddReview from './components/AddReview';

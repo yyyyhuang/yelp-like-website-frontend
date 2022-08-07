@@ -9,31 +9,31 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 
-import "./Movie.css";
+import "./Restaurant.css";
 
-const Movie = ({ user }) => {
+const Restaurant = ({ user }) => {
 
     let params = useParams();
 
-    const [movie, setMovie] = useState({
+    const [restaurant, setRestaurant] = useState({
         id: null,
-        title: "",
-        rated: "",
+        name: "",
+        starts: "",
         reviews: []
     });
     
     useEffect(() => {
-        const getMovie = id => {
+        const getRestaurant = id => {
                 RestaurantDataService.findId(id)
                     .then(response => {
-                        setMovie(response.data);
+                        setRestaurant(response.data);
                         // console.log(response.data)
                     })
                     .catch(e => {
                         console.log(e);
                     });
         }
-        getMovie(params.id)
+        getRestaurant(params.id)
     }, [params.id]);
 
     const deleteReview = (reviewId, index) => {
@@ -46,7 +46,7 @@ const Movie = ({ user }) => {
         RestaurantDataService.deleteReview(data)
             .then(response => {
                 console.log("data:"+data)
-                setMovie((prevState) => {
+                setRestaurant((prevState) => {
                     prevState.reviews.splice(index, 1);
                     return ({
                       ...prevState
@@ -67,30 +67,31 @@ const Movie = ({ user }) => {
                     <div className="poster">
                         <Image
                         className="bigPicture"
-                        src={movie?.poster+"/100px250"}
+                        src={restaurant?.poster+"/100px250"}
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null;
-                            currentTarget.src="/images/NoPosterAvailable-crop.jpg";
+                            currentTarget.src="/images/RestaurantSample.jpg";
                         }}
                         fluid />
                     </div>
                     </Col>
                     <Col>
                     <Card>
-                        <Card.Header as="h5">{movie?.title}</Card.Header>
+                        <Card.Header as="h5">{restaurant?.name}</Card.Header>
                         <Card.Body>
                             <Card.Text>
-                                {movie?.plot}
+                                {restaurant?.address}
+                                {restaurant?.city} {restaurant?.state} {restaurant?.postal_code}
                             </Card.Text>
                             { user &&
-                                <Link to={"/movies/" + params.id + "/review"}>
+                                <Link to={"/restaurants/" + params.id + "/review"}>
                                     Add Review
                                     </Link> }
                         </Card.Body>
                     </Card>
                     <h2>Reviews</h2>
                     <br></br>
-                    { movie?.reviews.map((review, index) => {
+                    { restaurant?.reviews.map((review, index) => {
                         return (
                             <div className="d-flex">
                                 <div className="flex-shrink-0 reviewsText">
@@ -100,7 +101,7 @@ const Movie = ({ user }) => {
                                         <Row>
                                             <Col>
                                             <Link to={{
-                                                pathname: "/movies/" + params.id + "/review"
+                                                pathname: "/restaurants/" + params.id + "/review"
                                             }}
                                             state = {{
                                                 currentReview: review
@@ -132,4 +133,4 @@ const Movie = ({ user }) => {
 }
 
 
-export default Movie;
+export default Restaurant;
