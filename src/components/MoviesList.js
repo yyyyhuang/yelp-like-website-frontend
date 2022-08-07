@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback} from "react";
 import RestaurantDataService from "../services/restaurants";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -202,9 +202,9 @@ const MoviesList = ({
                                                 edit={false}
                                                 />
                                         </Card.Text>
-                                        {/*<Link to={"/restaurants/"+restaurant.business_id}>
-                                            View Reviews
-                                        </Link>*/}
+                                        <Link to={"/restaurants/"+restaurant.business_id}>
+                                            View Restaurant Detail
+                                        </Link>
                                     </Card.Body>
                                 </Card>
                             </Col>
