@@ -194,7 +194,6 @@ const MoviesList = ({
                                     <Card.Body>
                                         <Card.Title> {restaurant.name} </Card.Title>
                                         <Card.Text>
-                                             {/*{starList.map((star)=>{<BsStarFill className="star starFill"/>})}*/}
                                             <ReactStars
                                                 size={30}
                                                 value={restaurant.stars}

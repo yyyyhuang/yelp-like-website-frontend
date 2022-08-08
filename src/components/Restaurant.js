@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
+import ReactStars from "react-rating-stars-component";
 
 import "./Restaurant.css";
 
@@ -18,7 +19,7 @@ const Restaurant = ({ user }) => {
     const [restaurant, setRestaurant] = useState({
         id: null,
         name: "",
-        starts: "",
+        stars: 0,
         reviews: []
     });
     
@@ -33,6 +34,7 @@ const Restaurant = ({ user }) => {
                         console.log(e);
                     });
         }
+        // console.log(params);
         getRestaurant(params.id)
     }, [params.id]);
 
@@ -83,6 +85,14 @@ const Restaurant = ({ user }) => {
                                 {restaurant?.address}
                                 {restaurant?.city} {restaurant?.state} {restaurant?.postal_code}
                             </Card.Text>
+                            <Card.Text>
+                                <ReactStars
+                                    size={30}
+                                    value={restaurant?.stars}
+                                    isHalf={true}
+                                    edit={false}
+                                />
+                            </Card.Text>
                             { user &&
                                 <Link to={"/restaurants/" + params.id + "/review"}>
                                     Add Review
@@ -95,8 +105,8 @@ const Restaurant = ({ user }) => {
                         return (
                             <div className="d-flex">
                                 <div className="flex-shrink-0 reviewsText">
-                                    <h5>{review.name + " reviewed on"} { moment(review.date).format("Do MMMM YYYY") }</h5>
-                                    <p className="review">{review.review}</p>
+                                    <h5>{" reviewed on"} { moment(review.date).format("Do MMMM YYYY") }</h5>
+                                    <p className="review">{review.text}</p>
                                     { user && user.googleId === review.user_id &&
                                         <Row>
                                             <Col>
