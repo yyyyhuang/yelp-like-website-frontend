@@ -82,8 +82,8 @@ const Restaurant = ({ user }) => {
                         <Card.Header as="h5">{restaurant?.name}</Card.Header>
                         <Card.Body>
                             <Card.Text>
-                                {restaurant?.address}
-                                {restaurant?.city} {restaurant?.state} {restaurant?.postal_code}
+                                {restaurant?.address + ", "}
+                                {restaurant?.city + ", "} {restaurant?.state} {restaurant?.postal_code}
                             </Card.Text>
                             <Card.Text>
                                 <ReactStars
@@ -92,7 +92,9 @@ const Restaurant = ({ user }) => {
                                     isHalf={true}
                                     edit={false}
                                 />
-                            </Card.Text>
+                            </Card.Text>  
+                            {/*TODO: Button onClick function */}                         
+                            <Button variant="primary">Save to Favorites</Button>
                             { user &&
                                 <Link to={"/restaurants/" + params.id + "/review"}>
                                     Add Review

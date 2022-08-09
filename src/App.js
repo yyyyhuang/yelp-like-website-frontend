@@ -201,9 +201,9 @@ function App() {
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
           />
-        */}
         }
         />
+        */}
       </Routes>
 
     </div>
