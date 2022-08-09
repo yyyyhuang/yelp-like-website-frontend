@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 import ReactStars from "react-rating-stars-component";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 import "./Restaurant.css";
 
@@ -94,7 +95,19 @@ const Restaurant = ({ user }) => {
                                 />
                             </Card.Text>  
                             {/*TODO: Button onClick function */}                         
-                            <Button variant="primary">Save to Favorites</Button>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    Save to Collection
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#/action-1">Colelction1</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Colelction2</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Colelction3</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item href="#/action-3">New Collection</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                             { user &&
                                 <Link to={"/restaurants/" + params.id + "/review"}>
                                     Add Review

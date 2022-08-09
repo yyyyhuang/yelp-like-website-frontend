@@ -27,9 +27,9 @@ class RestaurantDataService {
     //     return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/ratings`);
     // }
 
-    // createReview(data) {
-    //     return axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);
-    // }
+    createReview(data) {
+       return axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);
+    }
 
     // updateReview(data) {
     //     return axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);

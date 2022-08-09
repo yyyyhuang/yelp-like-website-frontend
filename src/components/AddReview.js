@@ -4,6 +4,7 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/esm/Container';
+import ReactStars from "react-rating-stars-component";
 
 const AddReview = ({ user }) => {
     const navigate = useNavigate();
@@ -21,36 +22,38 @@ const AddReview = ({ user }) => {
     }
 
     const [review,  setReview] = useState(initialReviewState);
+    const [stars, setStars] = useState(0);
 
     const onChangeReview = e => {
         const review = e.target.value;
         setReview(review);
     }
-
+    {/* TO: RANDOM REVIEW ID */}
     const saveReview = () => {
         var data = {
-            review: review,
-            name: user.name,
+            text: review,
             user_id: user.googleId,
-            movie_id: params.id // get movie id from url
+            business_id: params.id, // get movie id from url
+            stars: stars
         }
 
         if (editing) {
             // TODO: handle case where an existing
             // review is being updated
-            data = {...data, review_id: location.state.currentReview._id};
+            data = {...data, review_id: location.state.currentReview.review_id};
             RestaurantDataService.updateReview(data)
                 .then(response => {
-                    navigate("/movies/"+params.id);
+                    navigate("/restaurants/"+params.id);
                     console.log(location.state.currentReview);
                 })
                 .catch(e => {
                     console.log(e)
                 })
         } else {
+
             RestaurantDataService.createReview(data)
                 .then(response => {
-                    navigate("/movies/"+params.id)
+                    navigate("/restaurants/"+params.id)
                     editing = true;
                     console.log(editing)
                 })
@@ -74,6 +77,22 @@ const AddReview = ({ user }) => {
                         defaultValue={ editing ? initialReviewState : ""}
                         />
                 </Form.Group>
+                <ReactStars
+                    size={50}
+                    count={5}
+                    color={"grey"}
+                    activeColor={"yellow"}
+                    value={7.5}
+                    a11y={true}
+                    isHalf={true}
+                    emptyIcon={<i className="far fa-star" />}
+                    halfIcon={<i className="fa fa-star-half-alt" />}
+                    filledIco={<i className="fa fa-star" />}
+                    onChange={ (newValue) => {
+                      console.log(`Example 2: new value is ${newValue}`);
+                      setStars(newValue);
+                    }}
+                />
                 <Button variant='primary' onClick={ saveReview }>
                     Submit
                 </Button>
