@@ -6,9 +6,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
-import "bootstrap-icons/font/bootstrap-icons.css"
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import RestaurantsList from "./components/RestaurantsList";
 import Restaurant from "./components/Restaurant";
@@ -93,6 +93,35 @@ function App() {
       }
     }
   }, []);
+
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  const getLocation = useCallback(() => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      navigator.geolocation.getCurrentPosition((position) => {
+        setStatus(null);
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      }, () => {
+        setStatus('Unable to retrieve your location');
+      });
+    }
+  }, [lat, lng, status]);
+  
+
+  useEffect(()=> {
+    getLocation();
+    // console.log("lat:" + lat + "lng: " + lng);
+  }, [lat, lng, status]);
+   
+
+
+  
 
     
   /* filter here */

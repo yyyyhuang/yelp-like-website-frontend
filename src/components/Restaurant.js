@@ -72,7 +72,7 @@ const Restaurant = ({ user }) => {
             <Container>
                 <Row>
                     <Col>
-                    <Carousel cols={3} rows={1} gap={10} loop>
+                    <Carousel cols={3} rows={1} gap={10} showDots={true} containerStyle={{height: "500px"}} loop>
                         {restaurant.photos.map((photo)=>{
                             return(
                                <Carousel.Item>
