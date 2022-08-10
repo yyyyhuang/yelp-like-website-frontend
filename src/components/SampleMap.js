@@ -1,20 +1,31 @@
-import React, { useState } from 'react';
+import React from "react";
 import GoogleMapReact from 'google-map-react';
 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-const SimpleMap = (props) => {
-    const [center, setCenter] = useState({lat: 11.0168, lng: 76.9558 });
-    const [zoom, setZoom] = useState(11);
-    return (
-        <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAPkROnfq6oQ0iOuUEVOqbgC2SDTDZp0To' }}
-          defaultCenter={center}
-          defaultZoom={zoom}
-        >
-        </GoogleMapReact>
-      </div>
-    );
+export default function SimpleMap(){
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627
+    },
+    zoom: 11
+  };
+
+  return (
+    // Important! Always set the container height explicitly
+    <div style={{ height: '100vh', width: '100%' }}>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: "AIzaSyAPkROnfq6oQ0iOuUEVOqbgC2SDTDZp0To" }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
+      >
+        <AnyReactComponent
+          lat={59.955413}
+          lng={30.337844}
+          text="My Marker"
+        />
+      </GoogleMapReact>
+    </div>
+  );
 }
-
-export default SimpleMap;

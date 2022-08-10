@@ -17,7 +17,7 @@ import Logout from "./components/Logout";
 import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
 import FavoritesList from './components/FavoritesList';
-import SimpleMap from './components/SampleMap';
+
 
 
 import './App.css';
@@ -189,12 +189,12 @@ function App() {
       */}
       <Routes>
         <Route exact path={"/"} element={
-           <RestaurantsList 
+          <RestaurantsList 
             user={ user }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
-           />
+            />
         }
           /> 
         <Route exact path={"/restaurants"} element={

@@ -8,10 +8,12 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
-import ReactStars from 'react-rating-stars-component';
 import Dropdown from 'react-bootstrap/Dropdown';
+import ReactStars from "react-rating-stars-component";
+import Carousel from 'better-react-carousel';
 
 import "./Restaurant.css";
+
 
 const Restaurant = ({ user }) => {
 
@@ -22,7 +24,8 @@ const Restaurant = ({ user }) => {
         id: null,
         name: "",
         stars: 0,
-        reviews: []
+        reviews: [],
+        photos:[]
     });
 
     useEffect(() => {
@@ -30,7 +33,7 @@ const Restaurant = ({ user }) => {
                 RestaurantDataService.findId(id)
                     .then(response => {
                         setRestaurant(response.data);
-                        // console.log(response.data.stars)
+                        console.log(response.data.photo);
                     })
                     .catch(e => {
                         console.log(e);
@@ -69,16 +72,25 @@ const Restaurant = ({ user }) => {
             <Container>
                 <Row>
                     <Col>
-                    <div className="poster">
+                    <Carousel cols={3} rows={1} gap={10} loop>
+                        {restaurant.photos.map((photo)=>{
+                            return(
+                               <Carousel.Item>
+                                    <img width="400px"  src={photo.address} />
+                               </Carousel.Item> 
+                            )
+                        })}
+                    </Carousel>
+                    {/* <div className="poster">
                         <Image
                         className="bigPicture"
-                        src={restaurant.poster+"/100px250"}
+                        src={restaurant.photo.address}
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null;
                             currentTarget.src="/images/RestaurantSample.jpg";
-                        }}
+                        }}s
                         fluid />
-                    </div>
+                    </div> */}
                     </Col>
                     <Col>
                     <Card>
@@ -88,14 +100,12 @@ const Restaurant = ({ user }) => {
                                 {restaurant.address + ", "}
                                 {restaurant.city + ", "} {restaurant.state} {restaurant.postal_code}
                             </Card.Text>
-
                             <ReactStars
                                 size={30}
                                 value={restaurant.stars}
-                                isHalf={true}
                                 edit={false}
-                            />
-
+                                isHalf={true}
+                                />
 
                             {/*TODO: Button onClick function */}                         
                             <Dropdown>
