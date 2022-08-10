@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/esm/Container';
 import ReactStars from "react-rating-stars-component";
+import { v4 as uuid } from 'uuid';
 
 const AddReview = ({ user }) => {
     const navigate = useNavigate();
@@ -50,7 +51,9 @@ const AddReview = ({ user }) => {
                     console.log(e)
                 })
         } else {
-
+            const unique_id = uuid();
+            const small_id = unique_id.slice(0,22);
+            data = {...data, review_id: small_id};
             RestaurantDataService.createReview(data)
                 .then(response => {
                     navigate("/restaurants/"+params.id)
