@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
-import ReactStars from "react-rating-stars-component";
+import ReactStars from 'react-rating-stars-component';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import "./Restaurant.css";
@@ -17,19 +17,20 @@ const Restaurant = ({ user }) => {
 
     let params = useParams();
 
+
     const [restaurant, setRestaurant] = useState({
         id: null,
         name: "",
         stars: 0,
         reviews: []
     });
-    
+
     useEffect(() => {
         const getRestaurant = id => {
                 RestaurantDataService.findId(id)
                     .then(response => {
                         setRestaurant(response.data);
-                        // console.log(response.data)
+                        // console.log(response.data.stars)
                     })
                     .catch(e => {
                         console.log(e);
@@ -38,6 +39,7 @@ const Restaurant = ({ user }) => {
         // console.log(params);
         getRestaurant(params.id)
     }, [params.id]);
+
 
     const deleteReview = (reviewId, index) => {
 
@@ -70,7 +72,7 @@ const Restaurant = ({ user }) => {
                     <div className="poster">
                         <Image
                         className="bigPicture"
-                        src={restaurant?.poster+"/100px250"}
+                        src={restaurant.poster+"/100px250"}
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null;
                             currentTarget.src="/images/RestaurantSample.jpg";
@@ -80,20 +82,21 @@ const Restaurant = ({ user }) => {
                     </Col>
                     <Col>
                     <Card>
-                        <Card.Header as="h5">{restaurant?.name}</Card.Header>
+                        <Card.Header as="h5">{restaurant.name}</Card.Header>
                         <Card.Body>
                             <Card.Text>
-                                {restaurant?.address + ", "}
-                                {restaurant?.city + ", "} {restaurant?.state} {restaurant?.postal_code}
+                                {restaurant.address + ", "}
+                                {restaurant.city + ", "} {restaurant.state} {restaurant.postal_code}
                             </Card.Text>
-                            <Card.Text>
-                                <ReactStars
-                                    size={30}
-                                    value={restaurant?.stars}
-                                    isHalf={true}
-                                    edit={false}
-                                />
-                            </Card.Text>  
+
+                            <ReactStars
+                                size={30}
+                                value={restaurant.stars}
+                                isHalf={true}
+                                edit={false}
+                            />
+
+
                             {/*TODO: Button onClick function */}                         
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">

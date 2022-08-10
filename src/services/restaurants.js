@@ -14,8 +14,7 @@ class RestaurantDataService {
 
     findId(id) {
         return axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/id/${id}`
-            
+            `${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/id/${id}`  
         );
     }
 
