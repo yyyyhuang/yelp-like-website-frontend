@@ -15,6 +15,8 @@ import Logout from "./components/Logout";
 import AddReview from './components/AddReview';
 import FavoriteDataService from './services/favorites';
 import FavoritesList from './components/FavoritesList';
+import SimpleMap from './components/SampleMap';
+
 
 import './App.css';
 
@@ -132,6 +134,7 @@ function App() {
             }
           </Nav>
         </Navbar.Collapse>
+        
         { user ? (
               <Logout setUser={setUser} />
             ) : (
@@ -163,12 +166,13 @@ function App() {
       */}
       <Routes>
         <Route exact path={"/"} element={
-           <MoviesList 
-            user={ user }
+            <MoviesList 
+             user={ user }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
-          />}
+           />
+        }
           /> 
         <Route exact path={"/restaurants"} element={
           <MoviesList 
