@@ -11,15 +11,15 @@ import Card from 'react-bootstrap/Card';
 import ReactStars from "react-rating-stars-component";
 
 
-import "./MoviesList.css";
+import "./RestaurantsList.css";
 
 
-const MoviesList = ({
+const RestaurantsList = ({
     user
 }) => {
     // useState to set state values
     const [restaurants, setRestaurants] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
-    const [searchName, setsearchName] = useState("");
+    const [searchName, setSearchName] = useState("");
     // const [searchRating, setSearchRating] = useState("");
     // const [ratings, setRatings] = useState(["All Ratings"]);
     const [currentPage, setCurrentPage] = useState(0);
@@ -29,17 +29,17 @@ const MoviesList = ({
     // useCallback to define functions which should
     // only be created once and will be dependencies for
     // useEffect
-    /* 
-    const retrieveRatings = useCallback(() => {
-        RestaurantDataService.getRatings() // calls getRatings to get a l ist of possible ratings
-            .then(response => {
-                setRatings(["All Ratings"].concat(response.data))
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }, []); // empty array passed as the second argument of useCallback indicates that this function does not have any dependencies
-    */
+    
+    // const retrieveRatings = useCallback(() => {
+    //     RestaurantDataService.getRatings() // calls getRatings to get a l ist of possible ratings
+    //         .then(response => {
+    //             setRatings(["All Ratings"].concat(response.data))
+    //         })
+    //         .catch(e => {
+    //             console.log(e);
+    //         });
+    // }, []); // empty array passed as the second argument of useCallback indicates that this function does not have any dependencies
+
 
     const retrieveRestaurants = useCallback(() => {
         setCurrentSearchMode("");
@@ -75,16 +75,17 @@ const MoviesList = ({
     //     if (searchRating === "All Ratings") {
     //         retrieveRestaurants();
     //     } else {
-    //         find(searchRating, "rated");
+    //         find(searchRating, "stars");
     //     }
     // }, [find, searchRating, retrieveRestaurants]);
 
     const retrieveNextPage = useCallback(() => {
         if (currentSearchMode === "findByName") {
             findByName();
+        } else {
         // } else if (currentSearchMode === "findByRating") {
         //     findByRating();
-        } else {
+        // } else {
             retrieveRestaurants();
         }
     }, [currentSearchMode, findByName, retrieveRestaurants]);
@@ -108,7 +109,7 @@ const MoviesList = ({
     // other functions that are not depended on by useEffect
     const onChangeSearchName = e => {
         const searchName = e.target.value;
-        setsearchName(searchName);
+        setSearchName(searchName);
     }
 
     // const onChangeSearchRating = e => {
@@ -224,4 +225,4 @@ const MoviesList = ({
 }
 
 
-export default MoviesList;
+export default RestaurantsList;

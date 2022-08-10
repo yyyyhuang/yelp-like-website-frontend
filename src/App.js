@@ -5,15 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from "react-bootstrap/Navbar";
+import Dropdown from "react-bootstrap/Dropdown";
+import "bootstrap-icons/font/bootstrap-icons.css"
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import MoviesList from "./components/MoviesList";
-import Movie from "./components/Restaurant";
+import RestaurantsList from "./components/RestaurantsList";
+import Restaurant from "./components/Restaurant";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import AddReview from './components/AddReview';
-import FavoriteDataService from './services/favorites';
+import CollectionDataService from './services/collections';
 import FavoritesList from './components/FavoritesList';
 
 import './App.css';
@@ -113,21 +115,21 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
     <div className="App">
-      <Navbar bg="light" expand="lg" sticky="top" variant="dark">
+      <Navbar bg="light" expand="lg" sticky="top" variant="light">
         <Container className="Container-fluid">
         <Navbar.Brand className="brand" href="/">
-          <img src="/images/hungry-logo.png" alt="movies logo" className="moviesLogo"/>
+          <img src="/images/hungry-logo.png" alt="icon" className="iconLogo"/>
           WELCOME
           </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="ml-auto">
-            <Nav.Link as={Link}  to={"/movies"}>
-              Movies
+            <Nav.Link as={Link}  to={"/restaurants"}>
+              Restaurants
             </Nav.Link>
             { user &&
-              <Nav.Link as={Link} to={"/favorites"}>
-                  Favorites
+              <Nav.Link as={Link} to={"/collections"}>
+                  Collections
               </Nav.Link> 
             }
           </Nav>
@@ -137,7 +139,28 @@ function App() {
             ) : (
               <Login setUser={setUser} />
         )}
+          {/* <Navbar.Collapse id="responsive-navbar-nav" >
+          <Nav className="ml-auto">
+            { user && 
+              <Nav.Link as={Link} to={"/user"}>
+                <i class="bi bi-person-circle"></i>
+              </Nav.Link>
+            }
+          </Nav>
+        </Navbar.Collapse> */}
+          <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <i class="bi bi-person-circle"></i>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                  <Dropdown.Item href="/users">Profile</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+              </Dropdown.Menu>
+          </Dropdown>
         </Container>
+
       </Navbar>
       {/* 
       <Filter label={"Cuisine Type"} onApply={()=> alert(selectedCuisines)} children={cuisines}>
@@ -163,7 +186,7 @@ function App() {
       */}
       <Routes>
         <Route exact path={"/"} element={
-           <MoviesList 
+           <RestaurantsList 
             user={ user }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
@@ -171,7 +194,7 @@ function App() {
           />}
           /> 
         <Route exact path={"/restaurants"} element={
-          <MoviesList 
+          <RestaurantsList 
             user={ user }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
@@ -179,7 +202,7 @@ function App() {
           />}
           />
         <Route path={"/restaurants/:id/"} element={
-          <Movie user={ user }/>}
+          <Restaurant user={ user }/>}
           />
         <Route path={"/restaurants/:id/review"} element={
           <AddReview user={ user }/>}

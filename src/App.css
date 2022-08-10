@@ -21,7 +21,7 @@ body {
 }
 
 .navbar-nav.nav-link.link {
-  color: black;
+  color: black!important;
 }
 
 .navItem {
@@ -36,7 +36,7 @@ body {
   margin-top: 20px;
 }
 
-img.moviesLogo {
+img.iconLogo {
   height: 70px;
   padding-right: 5px;
 }
