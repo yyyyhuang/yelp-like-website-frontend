@@ -99,13 +99,17 @@ const Restaurant = ({ user }) => {
                             <Card.Text>
                                 {restaurant.address + ", "}
                                 {restaurant.city + ", "} {restaurant.state} {restaurant.postal_code}
+                                <ReactStars
+                                        key={restaurant.stars}
+                                        size={30}
+                                        value={restaurant.stars}
+                                        edit={false}
+                                        isHalf={true}
+                                        />
                             </Card.Text>
-                            <ReactStars
-                                size={30}
-                                value={restaurant.stars}
-                                edit={false}
-                                isHalf={true}
-                                />
+                                    
+
+                            
 
                             {/*TODO: Button onClick function */}                         
                             <Dropdown>

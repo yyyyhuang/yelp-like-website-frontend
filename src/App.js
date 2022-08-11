@@ -182,7 +182,7 @@ function App() {
         </Navbar.Collapse> */}
           <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <i class="bi bi-person-circle"></i>
+                <i className="bi bi-person-circle"></i>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
