@@ -48,9 +48,32 @@ const RestaurantsList = ({
                 setRestaurants(response.data.restaurants);
                 setCurrentPage(response.data.page);
                 setEntriesPerPage(response.data.entries_per_page);
+
+                // restaurants.map((restaurant) => {
+                //     RestaurantDataService.findPhoto(restaurant.business_id)
+                //     .then(response => {
+                //         if (response.data.address) {
+                //             restaurant = {
+                //                 ...restaurant,
+                //                 photo: response.data.address
+                //             }
+                //         } else {
+                //             restaurant = {
+                //                 ...restaurant,
+                //                 photo: '/images/RestaurantSample.jpg'
+                //             }
+                //         }
+                        
+                //         // console.log(restaurant.photo);
+                //     })
+                //     .catch(e => {
+                //         restaurant['photo'] = "./images/RestaurantSample.jpg";
+                //     })
+                // })
             })
             .catch(e => {
-                console.log(e);
+                console.log("sasy hi");
+                // console.log(e);
             });
     }, [currentPage]); // dependency currentPage which determines which set of 20 movies it will retrieve
 
@@ -115,6 +138,18 @@ const RestaurantsList = ({
     // const onChangeSearchRating = e => {
     //     const searchRating = e.target.value;
     //     setSearchRating(searchRating);
+    // }
+
+    // const findPhotoById = (id) => {
+    //     RestaurantDataService.findPhoto(id)
+    //     .then(response => {
+    //         setPhoto(response.data);
+    //         console.log(photo.address);
+            
+    //     })
+    //     .catch(e =>{
+    //        console.log(e);
+    //     })
     // }
 
     return (
@@ -186,7 +221,7 @@ const RestaurantsList = ({
                                     )*/}
                                     <Card.Img
                                     className="smallPoster"
-                                    src={restaurant.photo + "/100px180"}
+                                    src={restaurant.poster}
                                     onError={({ currentTarget }) => {
                                         currentTarget.onerror = null; // prevents looping
                                         currentTarget.src="/images/RestaurantSample.jpg";

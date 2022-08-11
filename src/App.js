@@ -16,7 +16,7 @@ import Restaurant from "./components/Restaurant";
 import Login from "./components/Login";
 import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
-import CollectionsList from './components/CollectionsList';
+// import CollectionsList from './components/CollectionsList';
 import FavoritesList from './components/FavoritesList';
 
 
@@ -243,8 +243,8 @@ function App() {
           <AddReview user={ user }/>}
           />
         
-
-        <Route exact path={"/collections"} element={
+        {/**
+         <Route exact path={"/collections"} element={
           user ?
           <CollectionsList collections={ collections } />
           :
@@ -256,6 +256,11 @@ function App() {
           />
         }
         />
+
+         */
+
+        }
+        
        
       </Routes>
 

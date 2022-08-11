@@ -33,7 +33,7 @@ const Restaurant = ({ user }) => {
                 RestaurantDataService.findId(id)
                     .then(response => {
                         setRestaurant(response.data);
-                        console.log(response.data.photo);
+                        // console.log(response.data.photo);
                     })
                     .catch(e => {
                         console.log(e);

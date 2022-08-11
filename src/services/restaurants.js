@@ -6,6 +6,10 @@ class RestaurantDataService {
         return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants?page=${page}`);
     }
 
+    findPhoto(id) {
+        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/id/${id}/photo`);
+    }
+
     find(query, by="name", page=0) {
         return axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants?${by}=${query}&page=${page}`
