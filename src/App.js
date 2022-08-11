@@ -1,4 +1,5 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { googleLogout } from '@react-oauth/google';
 import { useState, useCallback, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,9 +14,9 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import RestaurantsList from "./components/RestaurantsList";
 import Restaurant from "./components/Restaurant";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
+import CollectionsList from './components/CollectionsList';
 import FavoritesList from './components/FavoritesList';
 
 
@@ -28,8 +29,24 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
 
   const [user, setUser] = useState(null);
+  const [collections, setCollections] = useState([]);
+
+  const getCollectiions = useCallback(() => {
+    CollectionDataService.get(user.googleId)
+      .then(response => {
+        setCollections(response.data.collections);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }, [user]);
+
+  const handleLogout = () => {
+    googleLogout()
+    setUser(null);
+    console.log("Logged out successfully.");
+}
   /*
-  const [favorites, setFavorites] = useState([]);
   const [saveFavorites, setSaveFavorites] = useState(false);
   
   const addFavorite = (businessId) => {
@@ -42,15 +59,6 @@ function App() {
     setFavorites(favorites.filter(f => f !== businessId));
   }
 
-  const retrieveFavorites = useCallback(() => {
-    FavoriteDataService.getFavorites(user.googleId)
-      .then(response => {
-        setFavorites(response.data.favorites)
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }, [user]);
 
   const updateFavorites = useCallback(() => {
     var data = {
@@ -71,13 +79,13 @@ function App() {
     }
   }, [user, favorites, updateFavorites, saveFavorites]);
 
+  */
   useEffect(() => {
     if (user) {
-      retrieveFavorites();
+      getCollectiions();
     }
-  }, [user, retrieveFavorites]);
-
-  */
+  }, [user]);
+  
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
     // console.log(loginData);
@@ -167,20 +175,7 @@ function App() {
         </Navbar.Collapse>
         
         { user ? (
-              <Logout setUser={setUser} />
-            ) : (
-              <Login setUser={setUser} />
-        )}
-          {/* <Navbar.Collapse id="responsive-navbar-nav" >
-          <Nav className="ml-auto">
-            { user && 
-              <Nav.Link as={Link} to={"/user"}>
-                <i class="bi bi-person-circle"></i>
-              </Nav.Link>
-            }
-          </Nav>
-        </Navbar.Collapse> */}
-          <Dropdown>
+            <Dropdown>
               <Dropdown.Toggle variant="success" id="dropdown-basic">
                 <i className="bi bi-person-circle"></i>
               </Dropdown.Toggle>
@@ -188,9 +183,14 @@ function App() {
               <Dropdown.Menu>
                   <Dropdown.Item href="/users">Profile</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+                  <Dropdown.Item>
+                    <a onClick={handleLogout}>Logout</a>
+                  </Dropdown.Item>
               </Dropdown.Menu>
-          </Dropdown>
+            </Dropdown>
+            ) : (
+              <Login setUser={setUser} />
+        )}
         </Container>
 
       </Navbar>
@@ -220,6 +220,7 @@ function App() {
         <Route exact path={"/"} element={
           <RestaurantsList 
             user={ user }
+            collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
@@ -229,6 +230,7 @@ function App() {
         <Route exact path={"/restaurants"} element={
           <RestaurantsList 
             user={ user }
+            collections={ collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
@@ -241,25 +243,20 @@ function App() {
           <AddReview user={ user }/>}
           />
         
-        {/* favorites drogging page 
-        <Route exact path={"/favorites"} element={
-          user?
 
-          <DndProvider backend={HTML5Backend}>
-              <FavoritesList 
-                  favorites={ favorites }
-                        />
-				  </DndProvider>
+        <Route exact path={"/collections"} element={
+          user ?
+          <CollectionsList collections={ collections } />
           :
-          <MoviesList
+          <RestaurantsList
             user={ user }
+            collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
-            // favorites={ favorites }
           />
         }
         />
-        */}
+       
       </Routes>
 
     </div>
