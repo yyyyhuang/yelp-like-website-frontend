@@ -16,8 +16,9 @@ import Restaurant from "./components/Restaurant";
 import Login from "./components/Login";
 import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
-// import CollectionsList from './components/CollectionsList';
-import FavoritesList from './components/FavoritesList';
+import CollectionsList from './components/CollectionsList';
+// import UserDataService from './services/users';
+// import FavoritesList from './components/FavoritesList';
 
 
 
@@ -29,23 +30,24 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
 
   const [user, setUser] = useState(null);
-  const [collections, setCollections] = useState([]);
+  // const [collections, setCollections] = useState([]);
 
-  const getCollectiions = useCallback(() => {
-    CollectionDataService.get(user.googleId)
-      .then(response => {
-        setCollections(response.data.collections);
-      })
-      .catch(e => {
-        console.log(e);
-      })
-  }, [user]);
+  // const getCollectiions = useCallback(() => {
+  //   CollectionDataService.get(user.googleId)
+  //     .then(response => {
+  //       setCollections(response.data.collections);
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     })
+  // }, [user]);
 
   const handleLogout = () => {
     googleLogout()
     setUser(null);
     console.log("Logged out successfully.");
-}
+  }
+
   /*
   const [saveFavorites, setSaveFavorites] = useState(false);
   
@@ -80,11 +82,32 @@ function App() {
   }, [user, favorites, updateFavorites, saveFavorites]);
 
   */
-  useEffect(() => {
-    if (user) {
-      getCollectiions();
-    }
-  }, [user]);
+
+  // const createUser = useCallback((data) => {
+  //     UserDataService.createUser(data)
+  //     .catch(e => {
+  //       console.log(e);
+  //     })
+  //   }, []);
+
+
+  // useEffect(() => {
+  //   let loginData = JSON.parse(localStorage.getItem("login"));
+  //   if (loginData) {
+  //     // console.log(loginData.googleId)
+  //     var data = {
+  //       user_id: loginData.googleId,
+  //       name: loginData.given_name,
+  //     }
+  //     createUser(data);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     getCollectiions();
+  //   }
+  // }, [user]);
   
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
@@ -94,7 +117,7 @@ function App() {
       let now = Date.now()/1000;
       if (now < loginExp) {
         // Not expired
-        setUser(loginData);
+        setUser(loginData);       
       } else {
         // Expired
         localStorage.setItem("login", null);
@@ -181,7 +204,7 @@ function App() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                  <Dropdown.Item href="/users">Profile</Dropdown.Item>
+                  <Dropdown.Item href="#/users">Profile</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>
                     <a onClick={handleLogout}>Logout</a>
@@ -220,7 +243,7 @@ function App() {
         <Route exact path={"/"} element={
           <RestaurantsList 
             user={ user }
-            collections = { collections }
+            // collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
@@ -230,15 +253,15 @@ function App() {
         <Route exact path={"/restaurants"} element={
           <RestaurantsList 
             user={ user }
-            collections={ collections }
+            // collections={ collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
           />}
           />
-        <Route path={"/restaurants/:id/"} element={
+        {/* <Route path={"/restaurants/:id/"} element={
           <Restaurant user={ user }/>}
-          />
+          /> */}
         <Route path={"/restaurants/:id/review"} element={
           <AddReview user={ user }/>}
           />

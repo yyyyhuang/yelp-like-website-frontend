@@ -13,3 +13,11 @@ p.review {
 .bigPicture {
     float: right;
 }
+
+.flex-container {
+    display: flex;
+}
+
+.reviewButton {
+    margin-right: 20px;
+}

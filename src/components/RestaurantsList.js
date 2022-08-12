@@ -15,7 +15,7 @@ import "./RestaurantsList.css";
 
 
 const RestaurantsList = ({
-    user
+    user,
 }) => {
     // useState to set state values
     const [restaurants, setRestaurants] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
@@ -220,12 +220,12 @@ const RestaurantsList = ({
                                         }} />
                                     )*/}
                                     <Card.Img
-                                    className="smallPoster"
-                                    src={restaurant.poster}
-                                    onError={({ currentTarget }) => {
-                                        currentTarget.onerror = null; // prevents looping
-                                        currentTarget.src="/images/RestaurantSample.jpg";
-                                    }}
+                                        className="smallPoster"
+                                        src={restaurant.poster ? restaurant.poster : "/images/RestaurantSample.jpg"}
+                                        onError={({ currentTarget }) => {
+                                            currentTarget.onerror = null; // prevents looping
+                                            currentTarget.src="/images/RestaurantSample.jpg";
+                                        }}
                                     />
                                     <Card.Body>
                                         <Card.Title> {restaurant.name} </Card.Title>
