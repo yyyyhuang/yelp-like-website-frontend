@@ -15,7 +15,7 @@ import "./RestaurantsList.css";
 
 
 const RestaurantsList = ({
-    user
+    user,
 }) => {
     // useState to set state values
     const [restaurants, setRestaurants] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)

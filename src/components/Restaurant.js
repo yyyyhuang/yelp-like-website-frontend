@@ -81,16 +81,6 @@ const Restaurant = ({ user }) => {
                             )
                         })}
                     </Carousel>
-                    {/* <div className="poster">
-                        <Image
-                        className="bigPicture"
-                        src={restaurant.photo.address}
-                        onError={({ currentTarget }) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src="/images/RestaurantSample.jpg";
-                        }}s
-                        fluid />
-                    </div> */}
                     </Col>
                     <Col>
                     <Card>
@@ -111,24 +101,30 @@ const Restaurant = ({ user }) => {
 
                             
 
-                            {/*TODO: Button onClick function */}                         
-                            <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    Save to Collection
-                                </Dropdown.Toggle>
+                            {/*TODO: Button onClick function */}
+                            <div className="flex-container">
+                                <div>
+                                    { user &&
+                                        <Button to={"/restaurants/" + params.id + "/review"} className="reviewButton">
+                                            Add Review
+                                        </Button> }
+                                </div>
+                                <div>                  
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                            Save to Collection
+                                        </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Colelction1</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Colelction2</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Colelction3</Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item href="#/action-3">New Collection</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            { user &&
-                                <Link to={"/restaurants/" + params.id + "/review"}>
-                                    Add Review
-                                    </Link> }
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item href="#/action-1">Colelction1</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-2">Colelction2</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-3">Colelction3</Dropdown.Item>
+                                            <Dropdown.Divider />
+                                            <Dropdown.Item href="#/action-3">New Collection</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div> 
+                            </div>
                         </Card.Body>
                     </Card>
                     <h2>Reviews</h2>
