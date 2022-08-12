@@ -259,9 +259,9 @@ function App() {
             // favorites={ favorites }
           />}
           />
-        {/* <Route path={"/restaurants/:id/"} element={
+        <Route path={"/restaurants/:id/"} element={
           <Restaurant user={ user }/>}
-          /> */}
+          />
         <Route path={"/restaurants/:id/review"} element={
           <AddReview user={ user }/>}
           />
