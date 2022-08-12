@@ -8,6 +8,7 @@
 
 .moviesListCard {
     width: 18rem;
+
 }
 
 div.poster {
@@ -16,6 +17,7 @@ div.poster {
 
 .smallPoster {
     user-select: none;
+
 }
 
 .star {

@@ -221,7 +221,7 @@ const RestaurantsList = ({
                                     )*/}
                                     <Card.Img
                                     className="smallPoster"
-                                    src={restaurant.poster}
+                                    src={restaurant.poster ? restaurant.poster : "/images/RestaurantSample.jpg"}
                                     onError={({ currentTarget }) => {
                                         currentTarget.onerror = null; // prevents looping
                                         currentTarget.src="/images/RestaurantSample.jpg";
