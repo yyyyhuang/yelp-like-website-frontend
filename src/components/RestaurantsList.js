@@ -27,6 +27,7 @@ const RestaurantsList = ({
     const [currentPage, setCurrentPage] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(0);
     const [currentSearchMode, setCurrentSearchMode] = useState("");
+    const categories = ['< 1 mile', '< 2 miles', '< 5 miles'];
 
     // useCallback to define functions which should
     // only be created once and will be dependencies for
@@ -202,6 +203,29 @@ const RestaurantsList = ({
                         </Button>
                         </Col>
                         */}
+                        {/*<Col>
+                        <div className="filters" aria-labelledby="filters-header">
+                            <h3 id="filters-header">
+                                Distance
+                            </h3>
+                            
+                            <ul>
+                                {categories.map(category => {
+                                    return (
+                                        <li key={category}>
+                                        <label>
+                                        <input 
+
+                                            type="checkbox"
+                                            value={category} />
+                                        {category}
+                                        </label>
+                                    </li>
+                                    )
+                                })}
+                            </ul>
+                            </div>
+                            </Col>*/}
                     </Row>
                 </Form> 
                 

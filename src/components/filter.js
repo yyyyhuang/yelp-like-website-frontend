@@ -7,7 +7,7 @@ export default function Filter({ children, onApply, label }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(undefined);
   const buttonRef = useRef(undefined);
-  const modalRef = useRef(undefined);
+  // const modalRef = useRef(undefined);
 
   useEffect(() => {
     const handleClickOutside = event => {
