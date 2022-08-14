@@ -73,6 +73,7 @@ function App() {
       })
   }, [favorites, user])
 
+
   useEffect(() => {
     if (saveFavorites && user) {
       updateFavorites();
@@ -80,8 +81,27 @@ function App() {
       //reload = false;
     }
   }, [user, favorites, updateFavorites, saveFavorites]);
-
   */
+
+  // const createUser = useCallback((data) => {
+  //     UserDataService.createUser(data)
+  //     .catch(e => {
+  //       console.log(e);
+  //     })
+  //   }, []);
+
+
+  // useEffect(() => {
+  //   let loginData = JSON.parse(localStorage.getItem("login"));
+  //   if (loginData) {
+  //     // console.log(loginData.googleId)
+  //     var data = {
+  //       user_id: loginData.googleId,
+  //       name: loginData.given_name,
+  //     }
+  //     createUser(data);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   if (user) {
@@ -99,15 +119,17 @@ function App() {
         console.log(e);
       });
   }
-  
+
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
+    // console.log(loginData);
     if (loginData) {
       create(loginData);
       let loginExp = loginData.exp;
       let now = Date.now()/1000;
       if (now < loginExp) {
         // Not expired
+        setUser(loginData);       
         setUser(loginData);
       } else {
         // Expired
@@ -134,8 +156,6 @@ function App() {
       });
     }
   }, [lat, lng, status]);
-
-  
   
 
   useEffect(()=> {
@@ -143,11 +163,11 @@ function App() {
     // console.log("lat:" + lat + "lng: " + lng);
   }, [lat, lng, status]);
    
-
-
   
 
+
     
+
   /* filter here */
   // const [selectedCuisines, setSelectedCuisines] = useState([]);
 
@@ -163,8 +183,8 @@ function App() {
     
   }
   */
-
   
+
 
 
   return (
@@ -236,8 +256,6 @@ function App() {
         <Route exact path={"/"} element={
           <RestaurantsList 
             user={ user }
-            x={lat}
-            y={lng}
             // collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
@@ -261,23 +279,18 @@ function App() {
           <AddReview user={ user }/>}
           />
         
-        {/**
-         <Route exact path={"/collections"} element={
+        <Route exact path={"/collections"} element={
           user ?
-          <CollectionsList collections={ collections } />
+          <CollectionsList user={ user } />
           :
           <RestaurantsList
             user={ user }
-            collections = { collections }
+            // collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
           />
         }
         />
-
-         */
-
-        }
         
        
       </Routes>

@@ -1,3 +1,4 @@
+import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect, useCallback } from 'react';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/esm/Container';
@@ -10,26 +11,38 @@ const CollectionsList = ({
 }) => {
     const [collections, setCollections] = useState([]);
 
-    const getCollectiions = useCallback((id) => {
+    const getCollections = useCallback((id) => {
         if (id) {
             CollectionDataService.get(id)
             .then(response => {
-                let curCollections = response.map(res => res.data);
-                setCollections(curCollections);
+                setCollections(response.data.collections);
             })
-            .catch (e => {
-                console.log(e)
+            .catch(e => {
+                console.log(e);
             })
         }
     }, [])
 
     useEffect(() => {
-        getCollectiions(user.user_id);
-    }, [getCollectiions, user]);
+        getCollections(user.googleId);
+    }, [getCollections, user]);
 
     return (
         <div>
             <Container className='collectionsContainer'>
+                <div className="collectionsNav">
+                    <div className="collectionsTitle">
+                        <span>
+                            My Collections
+                        </span>
+                    </div>
+                    <div>
+                        <Button variant='light' size='sm'>
+                            Create a Collection
+                        </Button>
+                    </div>
+                </div>
+
                 <div className='collectionsPanel'>
                 {
                     collections && collections.length > 0 ?

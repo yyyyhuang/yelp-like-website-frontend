@@ -1,0 +1,10 @@
+.collectionsTitle {
+    padding: 1rem;
+    font-size: 2em;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.collectionsNav {
+    display: flex;
+    align-items: center;
+}
