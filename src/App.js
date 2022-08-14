@@ -17,7 +17,7 @@ import Login from "./components/Login";
 import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
 import CollectionsList from './components/CollectionsList';
-// import UserDataService from './services/users';
+import UserDataService from './services/users';
 // import FavoritesList from './components/FavoritesList';
 
 
@@ -83,41 +83,32 @@ function App() {
 
   */
 
-  // const createUser = useCallback((data) => {
-  //     UserDataService.createUser(data)
-  //     .catch(e => {
-  //       console.log(e);
-  //     })
-  //   }, []);
-
-
-//   useEffect(() => {
-//     let loginData = JSON.parse(localStorage.getItem("login"));
-//     if (loginData) {
-//       // console.log(loginData.googleId)
-//       var data = {
-//         user_id: loginData.googleId,
-//         name: loginData.given_name,
-//       }
-//       createUser(data);
-//     }
-// }, []);
-
   // useEffect(() => {
   //   if (user) {
   //     getCollectiions();
   //   }
   // }, [user]);
+
+  const create = (loginData) => {
+    var data = {
+      user_id: loginData.googleId,
+      name: loginData.given_name,
+    }
+    UserDataService.createUser(data)
+      .catch(e => {
+        console.log(e);
+      });
+  }
   
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
-    // console.log(loginData);
     if (loginData) {
+      create(loginData);
       let loginExp = loginData.exp;
       let now = Date.now()/1000;
       if (now < loginExp) {
         // Not expired
-        setUser(loginData);       
+        setUser(loginData);
       } else {
         // Expired
         localStorage.setItem("login", null);
@@ -263,9 +254,9 @@ function App() {
             // favorites={ favorites }
           />}
           />
-        {/* <Route path={"/restaurants/:id/"} element={
+        <Route path={"/restaurants/:id/"} element={
           <Restaurant user={ user }/>}
-          /> */}
+          />
         <Route path={"/restaurants/:id/review"} element={
           <AddReview user={ user }/>}
           />
