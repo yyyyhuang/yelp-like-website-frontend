@@ -91,17 +91,17 @@ function App() {
   //   }, []);
 
 
-  // useEffect(() => {
-  //   let loginData = JSON.parse(localStorage.getItem("login"));
-  //   if (loginData) {
-  //     // console.log(loginData.googleId)
-  //     var data = {
-  //       user_id: loginData.googleId,
-  //       name: loginData.given_name,
-  //     }
-  //     createUser(data);
-  //   }
-  // }, []);
+//   useEffect(() => {
+//     let loginData = JSON.parse(localStorage.getItem("login"));
+//     if (loginData) {
+//       // console.log(loginData.googleId)
+//       var data = {
+//         user_id: loginData.googleId,
+//         name: loginData.given_name,
+//       }
+//       createUser(data);
+//     }
+// }, []);
 
   // useEffect(() => {
   //   if (user) {
@@ -143,6 +143,8 @@ function App() {
       });
     }
   }, [lat, lng, status]);
+
+  
   
 
   useEffect(()=> {
@@ -243,6 +245,8 @@ function App() {
         <Route exact path={"/"} element={
           <RestaurantsList 
             user={ user }
+            x={lat}
+            y={lng}
             // collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
