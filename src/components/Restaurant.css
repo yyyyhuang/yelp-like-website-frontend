@@ -6,7 +6,7 @@ div.poster {
     margin: 10px;
 }
 
-p.review {
+.review {
     white-space: pre-line;
 }
 
@@ -20,4 +20,9 @@ p.review {
 
 .reviewButton {
     margin-right: 20px;
+}
+
+.reviewCard {
+    width: 81em;
+    border-radius: .6em;
 }

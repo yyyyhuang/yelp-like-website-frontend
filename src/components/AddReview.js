@@ -68,20 +68,8 @@ const AddReview = ({ user }) => {
 
     return (
         <Container className="main-container">
-            <Form>
-                <Form.Group className='mb-3'>
-                    <Form.Label>{ editing ? "Edit" : "Create" } Review</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        type="text"
-                        required
-                        review={ review }
-                        onChange={ onChangeReview }
-                        defaultValue={ editing ? initialReviewState : ""}
-                        />
-                </Form.Group>
-                <ReactStars
-                    size={50}
+            <ReactStars
+                    size={40}
                     count={5}
                     color={"grey"}
                     activeColor={"yellow"}
@@ -96,6 +84,19 @@ const AddReview = ({ user }) => {
                       setStars(newValue);
                     }}
                 />
+            <Form>
+                <Form.Group className='mb-3'>
+                    <Form.Label>{ editing ? "Edit" : "Create" } Review</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        type="text"
+                        required
+                        review={ review }
+                        onChange={ onChangeReview }
+                        defaultValue={ editing ? initialReviewState : ""}
+                        />
+                </Form.Group>
+                
                 <Button variant='primary' onClick={ saveReview }>
                     Submit
                 </Button>

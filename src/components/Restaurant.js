@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import RestaurantDataService from "../services/restaurants";
+// import UserDataService from "../services/users";
 import { Link, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/Container";
@@ -7,13 +8,13 @@ import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import moment from 'moment';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ReactStars from "react-rating-stars-component";
 import Carousel from 'better-react-carousel';
 
 import "./Restaurant.css";
-
 
 const Restaurant = ({ user }) => {
 
@@ -27,6 +28,14 @@ const Restaurant = ({ user }) => {
         reviews: [],
         photos:[]
     });
+
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        setShow(true);
+      }
+    const handleClose = () => {
+    setShow(false);
+    }
 
     useEffect(() => {
         const getRestaurant = id => {
@@ -105,36 +114,53 @@ const Restaurant = ({ user }) => {
                             <div className="flex-container">
                                 <div>
                                     { user &&
-                                        <Button to={"/restaurants/" + params.id + "/review"} className="reviewButton">
-                                            Add Review
+                                        <Button href={"/restaurants/" + params.id + "/review"} className="reviewButton">
+                                            <b class="bi bi-star"> Write a review </b>
                                         </Button> }
                                 </div>
-                                <div>                  
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                            Save to Collection
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="#/action-1">Colelction1</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Colelction2</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-3">Colelction3</Dropdown.Item>
-                                            <Dropdown.Divider />
-                                            <Dropdown.Item href="#/action-3">New Collection</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div> 
+                                <div>
+                                    { user &&
+                                        <Button className="reviewButton" onClick={handleShow}>
+                                            <b class="bi bi-bookmark"> Save </b>
+                                        </Button> }
+                                        <Modal
+                                        show={show}
+                                        aria-labelledby="contained-modal-title-v-center"
+                                        centered
+                                        onHide={handleClose}
+                                    >
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Save to collection</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <p>collections placeholder</p>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button onClick={handleClose}>Close</Button>
+                                        </Modal.Footer>
+                                    </Modal>
+                                </div>
                             </div>
                         </Card.Body>
                     </Card>
                     <h2>Reviews</h2>
                     <br></br>
                     { restaurant?.reviews.map((review, index) => {
+                        // const reviewUser = UserDataService.get(review.user_id);
                         return (
                             <div className="d-flex">
-                                <div className="flex-shrink-0 reviewsText">
-                                    <h5>{" reviewed on"} { moment(review.date).format("Do MMMM YYYY") }</h5>
-                                    <p className="review">{review.text}</p>
+                                <div className="flex-shrink-0">
+                                    <Card className="reviewCard">
+                                        <Card.Header as="h5">
+                                            {" reviewed on"} { moment(review.date).format("Do MMMM YYYY") }
+                                        </Card.Header>
+                                        <Card.Body>
+                                            <Card.Text className="reviewsText">
+                                                {review.text}
+                                            </Card.Text>
+                                        </Card.Body>
+
+                                    </Card>
                                     { user && user.googleId === review.user_id &&
                                         <Row>
                                             <Col>
