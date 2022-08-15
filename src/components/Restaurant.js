@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import RestaurantDataService from "../services/restaurants";
+import NewCollection from "./NewCollection";
 // import UserDataService from "../services/users";
 import { Link, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
@@ -130,13 +131,14 @@ const Restaurant = ({ user }) => {
                                         onHide={handleClose}
                                     >
                                         <Modal.Header closeButton>
-                                            <Modal.Title>Save to collection</Modal.Title>
+                                            <Modal.Title>Save to Collection</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
                                             <p>collections placeholder</p>
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <Button onClick={handleClose}>Close</Button>
+                                            <NewCollection onClick={handleClose}></NewCollection>
+                                            {/* <Button onClick={handleClose}>Close</Button> */}
                                         </Modal.Footer>
                                     </Modal>
                                 </div>
