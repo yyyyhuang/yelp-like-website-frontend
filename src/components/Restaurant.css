@@ -26,3 +26,8 @@ div.poster {
     width: 81em;
     border-radius: .6em;
 }
+
+.singleCollectionContainer {
+    display: flex;
+    flex-direction: row;
+}

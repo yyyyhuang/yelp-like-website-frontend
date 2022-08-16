@@ -1,31 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect, useCallback } from 'react';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/esm/Container';
+import NewCollection from './NewCollection';
+import RestaurantDataService from "../services/restaurants";
 
 import CollectionDataService from "../services/collections";
 import "./CollectionsList.css";
 
 const CollectionsList = ({
     user,
+    collections,
+    handleSave,
 }) => {
-    const [collections, setCollections] = useState([]);
-
-    const getCollections = useCallback((id) => {
-        if (id) {
-            CollectionDataService.get(id)
-            .then(response => {
-                setCollections(response.data.collections);
-            })
-            .catch(e => {
-                console.log(e);
-            })
-        }
-    }, [])
-
-    useEffect(() => {
-        getCollections(user.googleId);
-    }, [getCollections, user]);
 
     return (
         <div>
@@ -37,9 +26,10 @@ const CollectionsList = ({
                         </span>
                     </div>
                     <div>
-                        <Button variant='light' size='sm'>
-                            Create a Collection
-                        </Button>
+                        <NewCollection 
+                        user = { user }
+                        handleSave = { handleSave }
+                        />
                     </div>
                 </div>
 
@@ -54,7 +44,26 @@ const CollectionsList = ({
                 {
                 collections.length > 0 ?
                 <div>
-
+                    <Row xs={1} md={2} className="grid">
+                    { collections.map((collection, index) => {
+                        return (
+                            
+                                <Col>
+                                    <div>
+                                        <Card as="a" href={"/collections/"+collection._id} className="collectionCard">
+                                            <Card.Img
+                                            className="cardPoster"
+                                            src={"/images/RestaurantSample.jpg"}
+                                            />
+                                            <div className="cardTitle">{collection.name}</div>
+                                            <div>{collection.favorites.length} {collection.favorites.length > 0 ? "Places" : "Place"}</div>
+                                        </Card>
+                                    </div>
+                            </Col>
+                            
+                        )
+                    })}
+                    </Row>
                 </div>
                 :
                 <div></div>

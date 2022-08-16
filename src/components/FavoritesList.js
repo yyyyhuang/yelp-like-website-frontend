@@ -2,57 +2,50 @@ import update from 'immutability-helper'
 import { useCallback, useEffect, useState } from "react"
 import { Container } from 'react-bootstrap'
 import { DndCard } from "./DndCard"
+import Card from 'react-bootstrap/Card';
+import { useParams } from 'react-router-dom'
+import CollectionDataService from "../services/collections";
 import RestaurantDataService from "../services/restaurants";
 
 import "./favorites.css"
 
-const FavoritesList =({
-    favorites,
-}) => {
-    const[moviesFav, setMoviesFav] = useState([]);
+const FavoritesList =({}) => {
+    const[favoritesIds, setFavoritesIds] = useState([]);
+    const[favorites, setFavorites] = useState([]);
+    let params = useParams();
 
+    const getFavoritesIds = useCallback(()=>{
+      console.log(params.id);
+      CollectionDataService.getCollection(params.id)
+        .then(response => {
+          setFavoritesIds(response.data.favorites);
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    }, [params.id]);
 
-    const getMovieInfo = useCallback((ids)=>{
-      if(ids && ids.length>0){
+    const getFavorites = useCallback((ids) => {
+      if (ids && ids.length > 0) {
         RestaurantDataService.findIds(ids)
-        .then(response=>{
-          let get_movies = response.map(res=>res.data);
-          setMoviesFav(get_movies)
-        })
-        .catch(e=>{
-          console.log(e)
-        })
+          .then(response => {
+            let fav = response.map(res => res.data);
+            setFavorites(fav);
+          })
+          .catch(e => {
+            console.log(e);
+          })
       }
-    },[])
+    }, [])
 
     useEffect(()=>{
-      getMovieInfo(favorites);
-    },[getMovieInfo, favorites])
-    
+      getFavoritesIds();
+    },[params.id])
 
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
-      setMoviesFav((prevCards) =>
-        update(prevCards, {
-          $splice: [
-            [dragIndex, 1],
-            [hoverIndex, 0, prevCards[dragIndex]],
-          ],
-        }),
-      )
-    }, [])
-
-
-    const renderCard = useCallback((card, index) => {
-      return (
-        <DndCard
-          key={card._id}
-          id={index + 1}
-          movie={card}
-          index={index}
-          moveCard={moveCard}
-        />
-      )
-    }, [])
+    useEffect(() => {
+      getFavorites(favoritesIds);
+    }, [getFavorites, favoritesIds]);
     
     return (
         <div >
@@ -60,15 +53,34 @@ const FavoritesList =({
                 <div className='favoritesPanel'>
                 {
                   favorites && favorites.length>0?
-                   <span> Drag your favorites to rank them</span>:
+                   <span> My Favorites</span>:
                    <span>You haven't chosen any favorites</span>
                 }
                     
                 </div>
             
             {
-                moviesFav.length>0 ? 
-                <div style={{width:500, margin:16}}>{moviesFav.map((movie, i) => {return renderCard(movie, i)})}</div> 
+                favorites.length>0 ? 
+                <div>
+                  {favorites.map((restaurant, i) => {
+                    return (
+                          <div>
+                              <Card as="a" href={"/restaurants/"+restaurant.business_id} className="favCard">
+                                <Card.Img
+                                    className="favPoster"
+                                    src={restaurant.poster ? restaurant.poster : "/images/RestaurantSample.jpg"}
+                                    onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null; // prevents looping
+                                        currentTarget.src="/images/RestaurantSample.jpg";
+                                    }}
+                                    />
+                                  <div className="favTitle">{restaurant.name}</div>
+                              </Card>
+                          </div>
+                  
+              )
+                    })}
+                  </div> 
                 : 
                 <div></div>
             }

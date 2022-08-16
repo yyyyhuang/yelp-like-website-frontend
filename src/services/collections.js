@@ -15,7 +15,7 @@ class CollectionDataService {
     }
     
     get(id) {
-        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/collections`, id);
+        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/collections/${id}`);
     }
 
     getCollection(id) {

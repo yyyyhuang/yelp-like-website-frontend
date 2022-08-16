@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import RestaurantDataService from "../services/restaurants";
+import CollectionDataService from "../services/collections";
 import NewCollection from "./NewCollection";
 // import UserDataService from "../services/users";
 import { Link, useParams } from 'react-router-dom';
@@ -11,13 +12,13 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import moment from 'moment';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
 import Carousel from 'better-react-carousel';
 
 import "./Restaurant.css";
 
-const Restaurant = ({ user }) => {
+const Restaurant = ({ user, collections, handleSave }) => {
 
     let params = useParams();
 
@@ -36,6 +37,36 @@ const Restaurant = ({ user }) => {
       }
     const handleClose = () => {
     setShow(false);
+    }
+
+    const addToCollection = (collection) => {
+        const cur = collection.favorites ? collection.favorites : [];
+        const newFav = [...cur, params.id];
+        var data = {
+            _id: collection._id,
+            user_id: user.googleId,
+            name: collection.name,
+            favorites: newFav,
+        }
+        CollectionDataService.updateCollection(data)
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    const removeFromCollection = (collection) => {
+        const cur = collection.favorites;
+        const newFav = cur.filter(f => f !== params.id);
+        var data = {
+            _id: collection._id,
+            user_id: user.googleId,
+            name: collection.name,
+            favorites: newFav,
+        }
+        CollectionDataService.updateCollection(data)
+            .catch(e => {
+                console.log(e);
+            });
     }
 
     useEffect(() => {
@@ -120,25 +151,65 @@ const Restaurant = ({ user }) => {
                                         </Button> }
                                 </div>
                                 <div>
-                                    { user &&
+                                    { user && 
                                         <Button className="reviewButton" onClick={handleShow}>
                                             <b class="bi bi-bookmark"> Save </b>
-                                        </Button> }
+                                        </Button>
+                                     }
                                         <Modal
-                                        show={show}
-                                        aria-labelledby="contained-modal-title-v-center"
-                                        centered
-                                        onHide={handleClose}
-                                    >
+                                            show={show}
+                                            aria-labelledby="contained-modal-title-v-center"
+                                            centered
+                                            onHide={handleClose}
+                                        >
                                         <Modal.Header closeButton>
                                             <Modal.Title>Save to Collection</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
-                                            <p>collections placeholder</p>
+                                            <NewCollection 
+                                            user = { user } 
+                                            handleSave = { handleSave }/>
+                                            {
+                                                collections.length > 0 ?
+                                                <div>
+                                                    { collections.map((collection) => {
+                                                        return (
+                                                            <div>
+                                                                <Card>
+                                                                    <Card.Body className="singleCollectionContainer">
+                                                                        <Card.Text>{collection.name}</Card.Text>
+                                                                        { collection.favorites.includes(params.id) ?  
+                                                                        <div>
+                                                                            {/* <Button aria-disabled="true"> Save </Button> */}
+                                                                            {/* <p>Saved</p> */}
+                                                                            <Button onClick={ () =>{
+                                                                                removeFromCollection(collection);
+                                                                                handleClose()
+                                                                            }  }>Remove</Button>
+                                                                        </div>
+                                                                        :
+                                                                            <Button onClick={ () => {
+                                                                                addToCollection(collection);
+                                                                                handleClose();
+                                                                            }}>Save</Button>
+                                                                        }
+                                                                    </Card.Body>
+                                                                    
+                                                                </Card>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                                :
+                                                <div>
+                                                    <p>You do not have any collections yet.</p>
+                                                </div>
+                                            }
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <NewCollection onClick={handleClose}></NewCollection>
-                                            {/* <Button onClick={handleClose}>Close</Button> */}
+                                            {/* <NewCollection 
+                                            user = { user } 
+                                            handleSave = { handleSave }/> */}
                                         </Modal.Footer>
                                     </Modal>
                                 </div>

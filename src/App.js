@@ -18,7 +18,7 @@ import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
 import CollectionsList from './components/CollectionsList';
 import UserDataService from './services/users';
-// import FavoritesList from './components/FavoritesList';
+import FavoritesList from './components/FavoritesList';
 
 
 
@@ -30,17 +30,30 @@ const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function App() {
 
   const [user, setUser] = useState(null);
-  // const [collections, setCollections] = useState([]);
+  const [collections, setCollections] = useState([]);
+  // const [favorites, setFavorites] = useState([])
 
-  // const getCollectiions = useCallback(() => {
-  //   CollectionDataService.get(user.googleId)
-  //     .then(response => {
-  //       setCollections(response.data.collections);
-  //     })
-  //     .catch(e => {
-  //       console.log(e);
-  //     })
-  // }, [user]);
+  const getCollectiions = useCallback(() => {
+    CollectionDataService.get(user.googleId)
+      .then(response => {
+        setCollections(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  }, [user]);
+
+  const handleSave = (data) => {
+    CollectionDataService.createCollection(data)
+        // .then(response => {
+        //     let cur = CollectionDataService.get(user.googleId);
+        //     setMyCollections(cur);
+        // })
+        .catch(e => {
+            console.log(e);
+        });
+}
+
 
   const handleLogout = () => {
     googleLogout()
@@ -83,31 +96,11 @@ function App() {
   }, [user, favorites, updateFavorites, saveFavorites]);
   */
 
-  // const createUser = useCallback((data) => {
-  //     UserDataService.createUser(data)
-  //     .catch(e => {
-  //       console.log(e);
-  //     })
-  //   }, []);
-
-
-  // useEffect(() => {
-  //   let loginData = JSON.parse(localStorage.getItem("login"));
-  //   if (loginData) {
-  //     // console.log(loginData.googleId)
-  //     var data = {
-  //       user_id: loginData.googleId,
-  //       name: loginData.given_name,
-  //     }
-  //     createUser(data);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     getCollectiions();
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      getCollectiions();
+    }
+  }, [user, handleSave]);
 
   const create = (loginData) => {
     var data = {
@@ -129,7 +122,6 @@ function App() {
       let now = Date.now()/1000;
       if (now < loginExp) {
         // Not expired
-        setUser(loginData);       
         setUser(loginData);
       } else {
         // Expired
@@ -160,7 +152,7 @@ function App() {
 
   useEffect(()=> {
     getLocation();
-    console.log("lat:" + lat + "lng: " + lng);
+    // console.log("lat:" + lat + "lng: " + lng);
   }, [lat, lng, status]);
    
   
@@ -258,7 +250,7 @@ function App() {
             user={ user }
             x={lat}
             y={lng}
-            // collections = { collections }
+            collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
@@ -268,14 +260,19 @@ function App() {
         <Route exact path={"/restaurants"} element={
           <RestaurantsList 
             user={ user }
-            // collections={ collections }
+            collections={ collections }
+            handleSave = { handleSave }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
             // favorites={ favorites }
           />}
           />
         <Route path={"/restaurants/:id/"} element={
-          <Restaurant user={ user }/>}
+          <Restaurant 
+          user={ user }
+          collections = { collections }
+          handleSave = { handleSave }
+          />}
           />
         <Route path={"/restaurants/:id/review"} element={
           <AddReview user={ user }/>}
@@ -283,7 +280,11 @@ function App() {
         
         <Route exact path={"/collections"} element={
           user ?
-          <CollectionsList user={ user } />
+          <CollectionsList 
+          user={ user } 
+          collections = { collections }
+          handleSave = { handleSave }
+          />
           :
           <RestaurantsList
             user={ user }
@@ -293,7 +294,9 @@ function App() {
           />
         }
         />
-        
+        <Route path={"/collections/:id/"} element={
+          <FavoritesList user={ user }/>}
+        />
        
       </Routes>
 
