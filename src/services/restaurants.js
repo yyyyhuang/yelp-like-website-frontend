@@ -2,9 +2,9 @@ import axios from "axios";
 
 class RestaurantDataService {
     // use get axios to make get request to the api on the back end
-    // getAll(page = 0, x, y) {
-    //     return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants?page=${page}&x=${x}&y=${y}`);
-    // }
+    getByDistance( x, y, distance, page = 0) {
+        return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/distance?page=${page}&x=${x}&y=${y}&distance=${distance}`);
+    }
 
     getAll(page = 0) {
         return axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants?page=${page}`);

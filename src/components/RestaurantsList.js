@@ -157,16 +157,22 @@ const RestaurantsList = ({
     // }
 
 
-    const handleFilterChange = useCallback(event => {
+    const handleFilterChange = event => {
         setFilter(event.target.value);
-        RestaurantDataService.getByDistance(x, y, filter)
+        console.log(x, y);
+        RestaurantDataService.getByDistance(x, y, filter, currentPage)
                             .then(response => {
                                 setRestaurants(response.data.restaurants);
                                 })
                             .catch(e => {
                                     console.log(e);
                                 })
-    }, [x, y, filter]);
+    };
+
+    const resetRadioState = () => {
+        setFilter(10);
+        retrieveRestaurants();
+    }
 
 
     return (
@@ -197,23 +203,33 @@ const RestaurantsList = ({
                 <Row> 
                     <Col>
                         <div className="filters" aria-labelledby="filters-header">
-                            <h3 id="filters-header">
+                            <h4 id="filters-header">
                                 Distance
-                            </h3>
+                            </h4>
                             
                             <ul>
                                 {distance.map(dis => {
                                     return (
                                         <label>
-                                        <input 
+                                        <input key={dis}
                                             onChange={handleFilterChange}
                                             type="radio"
-                                            value={dis} />
-                                        {"< " + dis + "miles"}
+                                            value={dis} 
+                                            checked={ parseInt(filter) === parseInt(dis) }
+                                            />
+                                        {"< " + dis + " miles"}
                                         </label>
                                     )
                                 })}
+                            
                             </ul>
+                            <Button
+                                variant="primary"
+                                type="button"
+                                onClick={resetRadioState}
+                                >
+                                    reset
+                            </Button>
                             </div>
                         </Col>
                 

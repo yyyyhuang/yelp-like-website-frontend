@@ -147,34 +147,13 @@ function App() {
         setStatus('Unable to retrieve your location');
       });
     }
-  }, [lat, lng, status]);
+  }, [lat]);
   
 
   useEffect(()=> {
     getLocation();
-    // console.log("lat:" + lat + "lng: " + lng);
-  }, [lat, lng, status]);
+  },[getLocation]);
    
-  
-
-
-    
-
-  /* filter here */
-  // const [selectedCuisines, setSelectedCuisines] = useState([]);
-
-  // const handleSelect = cuisine => {
-    // const isSelected = selectedCuisines.includes(cuisine); 
-    /* If the option has already been selected, we remove it from the array. */
-    /* Otherwise, we add it. */ 
-    /*
-    const newSelection = isSelected 
-    ? selectedCuisines.filter(currentCuisine => currentCuisine !== cuisine)
-    : [...selectedCuisines, cuisine];
-    setSelectedCuisines(newSelection);
-    
-  }
-  */
   
 
 
