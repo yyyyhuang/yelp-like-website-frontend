@@ -156,7 +156,6 @@ const RestaurantsList = ({
     //     })
     // }
 
-
     const handleFilterChange = event => {
         setFilter(event.target.value);
         console.log(x, y);
@@ -172,7 +171,8 @@ const RestaurantsList = ({
     const resetRadioState = () => {
         setFilter(10);
         retrieveRestaurants();
-    }
+    };
+
 
 
     return (

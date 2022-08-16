@@ -147,12 +147,12 @@ function App() {
         setStatus('Unable to retrieve your location');
       });
     }
-  }, [lat]);
+  }, [user]);
   
 
   useEffect(()=> {
     getLocation();
-  },[getLocation]);
+  },[]);
    
   
 
