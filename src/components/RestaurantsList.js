@@ -156,7 +156,7 @@ const RestaurantsList = ({
     //     })
     // }
 
-
+    
     const handleFilterChange = useCallback(event => {
         setFilter(event.target.value);
         RestaurantDataService.getByDistance(x, y, filter)
@@ -167,6 +167,7 @@ const RestaurantsList = ({
                                     console.log(e);
                                 })
     }, [x, y, filter]);
+
 
 
     return (
