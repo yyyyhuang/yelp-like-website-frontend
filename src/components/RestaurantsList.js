@@ -27,7 +27,8 @@ const RestaurantsList = ({
     const [currentPage, setCurrentPage] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(0);
     const [currentSearchMode, setCurrentSearchMode] = useState("");
-    const categories = ['< 1 mile', '< 2 miles', '< 5 miles'];
+    const distance = [1, 2, 5];
+    const [filter, setFilter] = useState(10);
 
     // useCallback to define functions which should
     // only be created once and will be dependencies for
@@ -155,6 +156,19 @@ const RestaurantsList = ({
     //     })
     // }
 
+
+    const handleFilterChange = useCallback(event => {
+        setFilter(event.target.value);
+        RestaurantDataService.getByDistance(x, y, filter)
+                            .then(response => {
+                                setRestaurants(response.data.restaurants);
+                                })
+                            .catch(e => {
+                                    console.log(e);
+                                })
+    }, [x, y, filter]);
+
+
     return (
         <div className="App">
             <Container className="main-container">
@@ -177,57 +191,34 @@ const RestaurantsList = ({
                             Search
                         </Button>
                         </Col>
-                        {/*
-                        <Col> 
-                        <Form.Group className="mb-3">
-                            <Form.Control
-                                as="select"
-                                onChange={onChangeSearchRating}
-                            >
-                                { ratings.map((rating, i) => {
-                                    return (
-                                        <option value={rating}
-                                        key={i}>
-                                            {rating}
-                                        </option>
-                                    )
-                                })}
-                            </Form.Control>
-                        </Form.Group>
-                        <Button
-                            variant="primary"
-                            type="button"
-                            onClick={findByRating}
-                        >
-                            Search
-                        </Button>
-                        </Col>
-                        */}
-                        {/*<Col>
+                    </Row>
+                </Form> 
+            
+                <Row> 
+                    <Col>
                         <div className="filters" aria-labelledby="filters-header">
                             <h3 id="filters-header">
                                 Distance
                             </h3>
                             
                             <ul>
-                                {categories.map(category => {
+                                {distance.map(dis => {
                                     return (
-                                        <li key={category}>
                                         <label>
                                         <input 
-
-                                            type="checkbox"
-                                            value={category} />
-                                        {category}
+                                            onChange={handleFilterChange}
+                                            type="radio"
+                                            value={dis} />
+                                        {"< " + dis + "miles"}
                                         </label>
-                                    </li>
                                     )
                                 })}
                             </ul>
                             </div>
-                            </Col>*/}
-                    </Row>
-                </Form> 
+                        </Col>
+                
+                </Row>
+               
                 
                 <Row className="movieRow">
                     { restaurants.map((restaurant) => {

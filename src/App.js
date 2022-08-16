@@ -160,7 +160,7 @@ function App() {
 
   useEffect(()=> {
     getLocation();
-    // console.log("lat:" + lat + "lng: " + lng);
+    console.log("lat:" + lat + "lng: " + lng);
   }, [lat, lng, status]);
    
   
@@ -256,6 +256,8 @@ function App() {
         <Route exact path={"/"} element={
           <RestaurantsList 
             user={ user }
+            x={lat}
+            y={lng}
             // collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
