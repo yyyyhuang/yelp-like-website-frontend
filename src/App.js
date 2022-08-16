@@ -239,6 +239,8 @@ function App() {
         <Route exact path={"/restaurants"} element={
           <RestaurantsList 
             user={ user }
+            x={lat}
+            y={lng}
             collections={ collections }
             handleSave = { handleSave }
             // addFavorite={ addFavorite }
@@ -267,6 +269,8 @@ function App() {
           :
           <RestaurantsList
             user={ user }
+            x={lat}
+            y={lng}
             // collections = { collections }
             // addFavorite={ addFavorite }
             // deleteFavorite={ deleteFavorite }
