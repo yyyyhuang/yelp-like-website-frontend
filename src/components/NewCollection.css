@@ -1,12 +1,40 @@
 .collectionButton {
     background-color: #253b56;
     border: #253b56;
+    border-style: solid;
+    font-weight: bold;
+
 }
 
 .collectionButton:hover{
-    text-decoration: none;
+    background-color: white;
+    border-color: #253b56;
+    border-style: solid;
+    color: #253b56;
+    user-select: none;
+}
+
+.modalTitle {
+    color: #253b56;
+    font-weight: bold;
 }
 
 .modalFormLabel {
     color: #253b56;
+    font-weight: bold;
+}
+
+.saveButton {
+    background-color: #253b56;
+    border: #253b56;
+    border-style: solid;
+    font-weight: bold;
+}
+
+.saveButton:hover{
+    background-color: white;
+    border-color: #253b56;
+    border-style: solid;
+    color: #253b56;
+    user-select: none;
 }

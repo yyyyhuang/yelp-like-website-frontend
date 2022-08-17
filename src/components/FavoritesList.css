@@ -1,0 +1,46 @@
+.favTitle {
+  padding: 1rem;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #253b56;
+}
+
+.info {
+  padding: 1rem;
+  font-size: 1.5em;
+  color: #8294aa;
+}
+
+.favCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px #ccc;
+  cursor: pointer;
+  transition: all ease 200ms;
+  margin: 20px 20px;
+  color: #253b56;
+  text-decoration: none;
+}
+
+.favCard:hover {
+  transform: scale(1.03);
+  color: #253b56
+}
+
+.favPoster {
+  border-radius: 8px 8px 0 0;
+  max-height: 150px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.favContent {
+  padding: 4px 16px 20px 16px;
+}
+
+.favCardTitle {
+  margin: 12px 0px 0px 0px;
+  font-weight: bold;
+  font-size: 25;
+}

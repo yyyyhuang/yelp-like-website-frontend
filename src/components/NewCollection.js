@@ -27,26 +27,10 @@ const NewCollection = ({ user, handleSave }) => {
         setValue(e.target.value);
     }
 
-    // const handleSave = () => {
-    //     var data = {
-    //         user_id: user.googleId,
-    //         name: value
-    //     }
-
-    //     CollectionDataService.createCollection(data)
-    //         .then(response => {
-    //             const newCollections = CollectionDataService.get(data.user_id);
-    //             setCollections(newCollections);
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //         });
-    // }
-
     return (
         <div>
             <Button className="collectionButton" onClick={handleShow}>
-                Create New Collection
+                New
             </Button>
             <Modal
                 show={show}
@@ -55,7 +39,7 @@ const NewCollection = ({ user, handleSave }) => {
                 onHide={handleClose}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Create New Collection</Modal.Title>
+                    <Modal.Title className="modalTitle">Create New Collection</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -67,9 +51,12 @@ const NewCollection = ({ user, handleSave }) => {
                             onChange={ handleChange }
                             defaultValue={ "" }
                         />
-                        <Button onClick={ () => { handleSave(data); handleClose() } }>Save</Button>
+                        
                     </Form>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button className="saveButton" onClick={ () => { handleSave(data); handleClose() } }>Save</Button>
+                </Modal.Footer>
             </Modal>
         </div>
 

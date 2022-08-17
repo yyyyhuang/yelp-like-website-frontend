@@ -4,6 +4,11 @@
     font-weight: bold;
     color: #253b56;
 }
+.info {
+    padding: 1rem;
+    font-size: 1.5em;
+    color: #8294aa;
+}
 
 .collectionsNav {
     display: flex;
@@ -25,6 +30,7 @@
 
 .collectionCard:hover {
     transform: scale(1.03);
+    color: #253b56
 }
 
 .cardPoster {

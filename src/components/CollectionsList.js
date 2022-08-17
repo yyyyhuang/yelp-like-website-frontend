@@ -38,7 +38,7 @@ const CollectionsList = ({
                 {
                     collections && collections.length > 0 ?
                     <div></div>:
-                    <span>You haven't create any collections yet</span>
+                    <span className="info">You haven't create any collections yet</span>
                 }    
                 </div>
 
