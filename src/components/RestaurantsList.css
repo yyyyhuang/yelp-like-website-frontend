@@ -22,6 +22,12 @@
   border-style: solid;
   color: #253b56;
 }
+.searchButton:focus{
+  background-color: white;
+  border-color: #253b56;
+  border-style: solid;
+  color: #253b56;
+}
 
 .mainPage {
   display: flex;
@@ -53,7 +59,13 @@
   font-weight: bold;
 }
 
-.resetButton:hover{
+.resetButton:hover {
+  background-color: white;
+  border-color: #253b56;
+  border-style: solid;
+  color: #253b56;
+}
+.resetButton:focus{
   background-color: white;
   border-color: #253b56;
   border-style: solid;
@@ -126,57 +138,3 @@
   color: #253b56;
 }
 
-
-
-
-/* 
-.scroll {
-    overflow-y: auto !important;
-    max-height: 650px !important;
-  }
-  
-  .tag {
-    display: inline-block;
-    padding: 1px 6px;
-    margin: 4px 0;
-    background-color: #eee;
-    border-radius: 2px;
-    margin-right: 5px;
-    font-size: 12px;
-  }
-  
-  .btn {
-    border-radius: 5px;
-    border: 1px solid skyblue;
-  }
-  
-  .btn > a {
-    text-decoration: none;
-  }
-  
-  .fa-star {
-    color: rgb(255, 169, 27) !important;
-  }
-  
-  .box {
-    margin-top: 10px !important;
-  }
-  
-  .data-search-width {
-    width: 10%;
-  }
-  
-  .marginBottom {
-    margin-bottom: 50px;
-  }
-  
-  .dataSearch {
-    margin-top: 10px;
-  }
-
-  .filters {
-    border: 1px solid black;
-    padding: 10px;
-    position: sticky;
-    top: 50px;
-  } */

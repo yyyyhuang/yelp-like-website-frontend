@@ -162,7 +162,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
     <div className="App">
-      <Navbar expand="lg" sticky="top" variant="light" className="">
+      <Navbar expand="lg" sticky="top" className="navContainer">
         <Container className="Container-fluid">
         <Navbar.Brand className="brand" href="/">
           <img src="/images/hungry-logo.png" alt="icon" className="iconLogo"/>
@@ -171,11 +171,11 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="ml-auto">
-            <Nav.Link as={Link}  to={"/restaurants"}>
+            <Nav.Link as={Link}  to={"/restaurants"} className="navLink">
               Restaurants
             </Nav.Link>
             { user &&
-              <Nav.Link as={Link} to={"/collections"}>
+              <Nav.Link as={Link} to={"/collections"} className="navLink">
                   Collections
               </Nav.Link> 
             }

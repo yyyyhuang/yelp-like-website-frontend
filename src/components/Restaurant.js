@@ -147,13 +147,13 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                 <div>
                                     { user &&
                                         <Button href={"/restaurants/" + params.id + "/review"} className="reviewButton">
-                                            <b class="bi bi-star"> Write a review </b>
+                                            <b className="bi bi-star"> Write a review </b>
                                         </Button> }
                                 </div>
                                 <div>
                                     { user && 
                                         <Button className="reviewButton" onClick={handleShow}>
-                                            <b class="bi bi-bookmark"> Save </b>
+                                            <b className="bi bi-bookmark"> Save </b>
                                         </Button>
                                      }
                                         <Modal
