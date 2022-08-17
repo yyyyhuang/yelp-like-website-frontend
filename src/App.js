@@ -18,6 +18,7 @@ import AddReview from './components/AddReview';
 import CollectionDataService from './services/collections';
 import CollectionsList from './components/CollectionsList';
 import UserDataService from './services/users';
+import UserProfile from './components/UserProfile';
 import FavoritesList from './components/FavoritesList';
 
 
@@ -188,7 +189,7 @@ function App() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                  <Dropdown.Item href="#/users">Profile</Dropdown.Item>
+                  <Dropdown.Item href="/user">Profile</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>
                     <a onClick={handleLogout}>Logout</a>
@@ -280,7 +281,23 @@ function App() {
         <Route path={"/collections/:id/"} element={
           <FavoritesList user={ user }/>}
         />
-       
+
+        <Route path={"/user"} element={
+          user? 
+          <UserProfile
+            user = { user }
+            x = {lat}
+            y = { lng }
+            collections = {collections}
+            />
+            :
+            <RestaurantsList
+            user={ user }
+            x={lat}
+            y={lng}
+            />
+        }
+       />
       </Routes>
 
     </div>

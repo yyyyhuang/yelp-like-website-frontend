@@ -1,0 +1,19 @@
+.banner {
+    justify-content: center;
+    align-items: center;
+}
+
+
+.userInfo {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    height: '200px';
+}
+
+.left-banner {
+    display: flex;
+    flex-direction: column;
+    width: "150px";
+}
+
