@@ -94,7 +94,7 @@ const Restaurant = ({ user, collections, handleSave }) => {
         
         RestaurantDataService.deleteReview(data)
             .then(response => {
-                console.log("data:"+data)
+                // console.log("data:"+data)
                 setRestaurant((prevState) => {
                     prevState.reviews.splice(index, 1);
                     return ({
@@ -250,7 +250,7 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                                 <Button variant="link" onClick={ () =>
                                                 {
                                                     // TODO: IMPLEMENT DELETE BEHAVIOR
-                                                    deleteReview(review._id, index)
+                                                    deleteReview(review.review_id, index)
                                                     
                                                 }}>
                                                     Delete

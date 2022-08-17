@@ -42,8 +42,8 @@ class RestaurantDataService {
         return axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);
     }
 
-    // deleteReview(data) {
-    //     return axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, {data});
-    // }
+    deleteReview(data) {
+        return axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, {data});
+    }
 }
 export default new RestaurantDataService();

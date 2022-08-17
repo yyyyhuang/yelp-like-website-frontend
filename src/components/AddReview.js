@@ -19,7 +19,7 @@ const AddReview = ({ user }) => {
 
     if (location.state !== null) {
         editing = true;
-        initialReviewState=location.state.currentReview.review;
+        initialReviewState=location.state.currentReview.text;
     }
 
     const [review,  setReview] = useState(initialReviewState);
@@ -58,7 +58,7 @@ const AddReview = ({ user }) => {
                 .then(response => {
                     navigate("/restaurants/"+params.id)
                     editing = true;
-                    console.log(editing)
+                    // console.log(editing)
                 })
                 .catch(e => {
                     console.log(e)
