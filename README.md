@@ -30,7 +30,26 @@ https://github.ccs.neu.edu/NEU-CS5610-SU22/2--Milk--backend
     use of third party:
     <img width="1440" alt="third party" src="/screenshot/third_party.jpg">
 
-2. Dependencies and Node version:
+2. Implemented functionalities:
+    - Landing Page:
+        - Google Login and Logout
+        - Show Collections, Favorites, and Profile pages for login users
+        - Search bar to search by name
+        - Filter restaurants by distance based on user's current location
+    - Restaurant Detail Page:
+        - Show restaurant details, address, categories, and a dynamic image gallery
+        - Show sorted reviews by date
+        - Login users can write, edit, delete reviews
+        - Login users can add/remove the restaurant to collections
+    - Collection Page:
+        - Show collections for login users
+        - User can edit/delete collections
+    - Favorite Page:
+        - Show saved restaurants for a collection
+    - User Profile Page:
+        - Login users can view its information and recent activities
+
+3. Dependencies and Node version:
 
 Run npm install to install all the dependencies
 
@@ -40,7 +59,7 @@ node version: v17.6.0
 Backend:
 node version: v17.6.0
 
-3. Members' contribution
+4. Members' contribution
     - Yingjie Huang:
         - add landing page filter by distance 
         - sort reviews by date
@@ -48,14 +67,16 @@ node version: v17.6.0
         - update README
     - Wanqing Guo:
         - reformat database
-        - landing page style
+        - all pages style
         - update user profile page and collection page
         - deploy to Heroku
- 4. Screenshots
+
+5. Screenshots
     Landing page:
     Detail Page:
     User Profile Page:
     Collections Page:
+    Collection Detail/Favorite List Page:
     Add Review Page:
 
 
