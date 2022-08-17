@@ -69,7 +69,7 @@ const AddReview = ({ user }) => {
     return (
         <Container className="main-container">
             <ReactStars
-                    size={40}
+                    size={50}
                     count={5}
                     color={"grey"}
                     activeColor={"yellow"}

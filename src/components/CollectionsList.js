@@ -9,6 +9,7 @@ import RestaurantDataService from "../services/restaurants";
 
 import CollectionDataService from "../services/collections";
 import "./CollectionsList.css";
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const CollectionsList = ({
     user,
@@ -36,7 +37,7 @@ const CollectionsList = ({
                 <div className='collectionsPanel'>
                 {
                     collections && collections.length > 0 ?
-                    <span>My collections</span> :
+                    <div></div>:
                     <span>You haven't create any collections yet</span>
                 }    
                 </div>
@@ -44,7 +45,7 @@ const CollectionsList = ({
                 {
                 collections.length > 0 ?
                 <div>
-                    <Row xs={1} md={2} className="grid">
+                    <Row xs={1} md={3} className="grid">
                     { collections.map((collection, index) => {
                         return (
                             
@@ -55,8 +56,10 @@ const CollectionsList = ({
                                             className="cardPoster"
                                             src={"/images/RestaurantSample.jpg"}
                                             />
-                                            <div className="cardTitle">{collection.name}</div>
-                                            <div>{collection.favorites.length} {collection.favorites.length > 0 ? "Places" : "Place"}</div>
+                                            <Card.Body className="cardContent">
+                                            <Card.Title className="cardTitle">{collection.name}</Card.Title>
+                                            <Card.Text className="cardInfo">{collection.favorites.length} {collection.favorites.length > 0 ? "Places" : "Place"}</Card.Text>
+                                            </Card.Body>
                                         </Card>
                                     </div>
                             </Col>

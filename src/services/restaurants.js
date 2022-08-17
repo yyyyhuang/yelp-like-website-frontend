@@ -38,9 +38,9 @@ class RestaurantDataService {
        return axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);
     }
 
-    // updateReview(data) {
-    //     return axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);
-    // }
+    updateReview(data) {
+        return axios.put(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, data);
+    }
 
     // deleteReview(data) {
     //     return axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/restaurants/review`, {data});

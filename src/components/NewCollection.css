@@ -1,0 +1,12 @@
+.collectionButton {
+    background-color: #253b56;
+    border: #253b56;
+}
+
+.collectionButton:hover{
+    text-decoration: none;
+}
+
+.modalFormLabel {
+    color: #253b56;
+}

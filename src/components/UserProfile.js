@@ -13,11 +13,11 @@ const UserProfile = ({
     collections
 }) => {
     const [reviews, setReviews] = useState([]);
-    const [reviewedRes, setReviewedRes] = useState([])
   
     const getReviews = useCallback(() => {
       UserDataService.get(user.googleId)
         .then(response => {
+            console.log(response.data);
           setReviews(response.data.reviews);
         })
         .catch(e => {
@@ -25,19 +25,6 @@ const UserProfile = ({
         })
     }, [user]);
 
-    // const getRestaurant = useCallback(() => {
-    //         const ids = reviews.map(({ business_id }) => business_id);
-    //         RestaurantDataService.findIds(ids)
-    //             .then(response => {
-    //                     let restaurants = response.map(res => res.data);
-    //                     console.log(restaurants);
-    //                     setReviewedRes(restaurants);
-
-    //             })
-    //             .catch(e => {
-    //                 console.log(e);
-    //             })
-    // }, []);
 
     useEffect(()=> {
         if (user) {
@@ -45,11 +32,6 @@ const UserProfile = ({
         }
       },[user]);
 
-    // useEffect(() => {
-    //     if(reviews) {
-    //         getRestaurant();
-    //     }
-    // }, [reviews]);
 
 
   return (

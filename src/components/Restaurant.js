@@ -225,7 +225,7 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                 <div className="flex-shrink-0">
                                     <Card className="reviewCard">
                                         <Card.Header as="h5">
-                                            {" reviewed on"} { moment(review.date).format("Do MMMM YYYY") }
+                                            {review.user_name} reviewed on { moment(review.date).format("Do MMMM YYYY") }
                                         </Card.Header>
                                         <Card.Body>
                                             <Card.Text className="reviewsText">

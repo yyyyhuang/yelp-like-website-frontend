@@ -6,10 +6,9 @@ import Form from 'react-bootstrap/Form';
 import CollectionDataService from "../services/collections";
 import collections from "../services/collections";
 
+import "./NewCollection.css"
 
 const NewCollection = ({ user, handleSave }) => {
-    const navigate = useNavigate();
-    let location = useLocation();
 
     const [show, setShow] = useState(false);
     const [value, setValue] = useState("");
@@ -46,7 +45,7 @@ const NewCollection = ({ user, handleSave }) => {
 
     return (
         <div>
-            <Button className="reviewButton" onClick={handleShow}>
+            <Button className="collectionButton" onClick={handleShow}>
                 Create New Collection
             </Button>
             <Modal
@@ -60,7 +59,7 @@ const NewCollection = ({ user, handleSave }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Label>Collection Name</Form.Label>
+                        <Form.Label className="modalFormLabel">Collection Name</Form.Label>
                         <Form.Control
                             as="textarea"
                             type="text"
