@@ -28,10 +28,16 @@
     text-decoration: none;
 }
 
+.collectionCard:visited {
+    color: #253b56
+}
+
+
 .collectionCard:hover {
     transform: scale(1.03);
     color: #253b56
 }
+
 
 .cardPoster {
     border-radius: 8px 8px 0 0;

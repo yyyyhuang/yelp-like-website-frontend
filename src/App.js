@@ -162,7 +162,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
     <div className="App">
-      <Navbar bg="light" expand="lg" sticky="top" variant="light">
+      <Navbar expand="lg" sticky="top" variant="light" className="">
         <Container className="Container-fluid">
         <Navbar.Brand className="brand" href="/">
           <img src="/images/hungry-logo.png" alt="icon" className="iconLogo"/>
@@ -184,11 +184,11 @@ function App() {
         
         { user ? (
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <i className="bi bi-person-circle"></i>
+              <Dropdown.Toggle variant="success" id="dropdown-basic" className="userProfile">
+                <b className="bi bi-person-circle"></b>
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu className="menu">
                   <Dropdown.Item href="/user">Profile</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>

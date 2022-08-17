@@ -1,9 +1,71 @@
-.movieRow {
+.searchContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.searchBar {
+  width: 500px;
+}
+
+.searchButton {
+  margin-left: 20px;
+  background-color: #253b56;
+  border: #253b56;
+  border-style: solid;
+  font-weight: bold;
+}
+
+.searchButton:hover{
+  background-color: white;
+  border-color: #253b56;
+  border-style: solid;
+  color: #253b56;
+}
+
+.mainPage {
+  display: flex;
+  flex-direction: row;
+}
+
+.filters {
+  width: 150px;
+  position:sticky;
+  margin-top: 30px;
+  align-items: flex-start;
+} 
+
+.filter-header {
+  color: #253b56;
+  font-size: 25;
+}
+
+.choices {
+  color: #253b56;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.resetButton {
+  background-color: #253b56;
+  border: #253b56;
+  border-style: solid;
+  font-weight: bold;
+}
+
+.resetButton:hover{
+  background-color: white;
+  border-color: #253b56;
+  border-style: solid;
+  color: #253b56;
+}
+
+.resRow {
     margin-top: 15px;
 }
 
 .card {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .resListCard {
@@ -17,39 +79,57 @@
     color: #253b56;
     text-decoration: none;
     width: 18rem;
+    height: 320px;
 }
 
-div.poster {
-    margin: 10px;
+.resContent {
+  padding: 4px 16px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .smallPoster {
   border-radius: 8px 8px 0 0;
-  max-height: 100px;
+  max-height: 150px;
   overflow: hidden;
   object-fit: cover;
-  width: 18rem;
 }
 
-.star {
-    width: 32.5em;
-    height: 4em;
-    filter: drop-shadow(2px 4px 6px black);
-    color: white
+.cardTitle {
+  margin: 12px 0px 0px 0px;
+  font-weight: bold;
+  font-size: 25;
 }
 
-.starFill {
-    fill: yellow;
+.detailLink {
+  text-decoration: none;
+  color: #8294aa;
+}
+.detailLink:hover {
+  color: #253b56;
 }
 
-.startEmpty {
-    fill: white;
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.showingpage {
+  color:#253b56;
+}
+
+.next {
+  text-decoration: none;
+  color: #253b56;
 }
 
 
 
 
-
+/* 
 .scroll {
     overflow-y: auto !important;
     max-height: 650px !important;
@@ -86,15 +166,6 @@ div.poster {
     width: 10%;
   }
   
-  .links {
-    margin-left: 10px;
-    margin-top: 5px;
-  }
-  
-  .link {
-    margin-left: 5px;
-  }
-  
   .marginBottom {
     margin-bottom: 50px;
   }
@@ -108,4 +179,4 @@ div.poster {
     padding: 10px;
     position: sticky;
     top: 50px;
-  }
+  } */
