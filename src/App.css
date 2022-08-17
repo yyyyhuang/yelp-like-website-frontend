@@ -64,5 +64,11 @@ img.iconLogo {
 }
 
 .menu {
-  width: 60px!important;
+  max-width: 120px !important;
 }
+
+.dropLink {
+  font-weight: bold;
+  color: #253b56;
+}
+

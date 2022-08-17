@@ -2,17 +2,14 @@ import React, {useState, useEffect} from "react";
 import RestaurantDataService from "../services/restaurants";
 import CollectionDataService from "../services/collections";
 import NewCollection from "./NewCollection";
-// import UserDataService from "../services/users";
 import { Link, useParams } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Container from "react-bootstrap/Container";
-import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import moment from 'moment';
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
 import Carousel from 'better-react-carousel';
 
@@ -110,26 +107,36 @@ const Restaurant = ({ user, collections, handleSave }) => {
 
     return (
         <div>
-            <Container>
-                <Row>
-                    <Col>
-                    <Carousel cols={3} rows={1} gap={10} showDots={true} containerStyle={{height: "500px"}} loop>
-                        {restaurant.photos.map((photo)=>{
-                            return(
-                               <Carousel.Item>
-                                    <img width="400px"  src={photo.address} />
-                               </Carousel.Item> 
-                            )
-                        })}
+            <Container className="detailContainer">
+                <div className="carouselContainer">
+                    <Carousel cols={3} rows={1} gap={40} showDots={true} containerStyle={{height: "500px"}} loop> 
+                        {restaurant.photos.length > 0 ? 
+                            restaurant.photos.map((photo)=>{
+                                return(
+                                    <Carousel.Item>
+                                        <img width="300px" height="500px" className="galleryImg" 
+                                        src={photo.address} />
+                                    </Carousel.Item> 
+                                )
+                            })
+                            :
+                        <Carousel.Item>
+                                    <img width="300px" height="500px" className="galleryImg" src="/images/RestaurantSample.jpg" />
+                        </Carousel.Item>
+                        }
+
                     </Carousel>
-                    </Col>
-                    <Col>
+                </div>
+
+
+                <div className="busiInfoContainer">
                     <Card>
-                        <Card.Header as="h5">{restaurant.name}</Card.Header>
+                        <Card.Header className="head">{restaurant.name}</Card.Header>
                         <Card.Body>
-                            <Card.Text>
-                                {restaurant.address + ", "}
-                                {restaurant.city + ", "} {restaurant.state} {restaurant.postal_code}
+                            <Card.Text className="detailInfo">
+                                Address: {restaurant.address + ", "}
+                                {restaurant.city + ", "} {restaurant.state} {restaurant.postal_code + "\n"}
+                                Categories: {restaurant.categories}
                                 <ReactStars
                                         key={restaurant.stars}
                                         size={30}
@@ -141,18 +148,17 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                     
 
                             
-
-                            {/*TODO: Button onClick function */}
                             <div className="flex-container">
                                 <div>
                                     { user &&
-                                        <Button href={"/restaurants/" + params.id + "/review"} className="reviewButton">
+                                        <Button href={"/restaurants/" + params.id + "/review"} className="detailButton">
                                             <b className="bi bi-star"> Write a review </b>
                                         </Button> }
                                 </div>
+
                                 <div>
                                     { user && 
-                                        <Button className="reviewButton" onClick={handleShow}>
+                                        <Button className="detailButton" onClick={handleShow}>
                                             <b className="bi bi-bookmark"> Save </b>
                                         </Button>
                                      }
@@ -166,9 +172,12 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                             <Modal.Title>Save to Collection</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
+                                            
                                             <NewCollection 
                                             user = { user } 
-                                            handleSave = { handleSave }/>
+                                            handleSave = { handleSave }
+                                            />
+                                            
                                             {
                                                 collections.length > 0 ?
                                                 <div>
@@ -177,7 +186,7 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                                             <div>
                                                                 <Card>
                                                                     <Card.Body className="singleCollectionContainer">
-                                                                        <Card.Text>{collection.name}</Card.Text>
+                                                                        <Card.Text className="singleCollectionName">{collection.name}</Card.Text>
                                                                         { collection.favorites.includes(params.id) ?  
                                                                         <div>
                                                                             {/* <Button aria-disabled="true"> Save </Button> */}
@@ -185,13 +194,13 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                                                             <Button onClick={ () =>{
                                                                                 removeFromCollection(collection);
                                                                                 handleClose()
-                                                                            }  }>Remove</Button>
+                                                                            }} className="detailButton">Remove</Button>
                                                                         </div>
                                                                         :
                                                                             <Button onClick={ () => {
                                                                                 addToCollection(collection);
                                                                                 handleClose();
-                                                                            }}>Save</Button>
+                                                                            }} className="detailButton">Save</Button>
                                                                         }
                                                                     </Card.Body>
                                                                     
@@ -202,39 +211,32 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                                 </div>
                                                 :
                                                 <div>
-                                                    <p>You do not have any collections yet.</p>
+                                                    <p className="detailCollectionInfo">You do not have any collections yet.</p>
                                                 </div>
                                             }
                                         </Modal.Body>
-                                        <Modal.Footer>
-                                            {/* <NewCollection 
-                                            user = { user } 
-                                            handleSave = { handleSave }/> */}
-                                        </Modal.Footer>
                                     </Modal>
                                 </div>
                             </div>
                         </Card.Body>
                     </Card>
-                    <h2>Reviews</h2>
+                    </div>
+                    <div className="reviewsStart">Reviews</div>
                     <br></br>
                     { restaurant?.reviews.map((review, index) => {
-                        // const reviewUser = UserDataService.get(review.user_id);
+                        
                         return (
-                            <div className="d-flex">
-                                <div className="flex-shrink-0">
-                                    <Card className="reviewCard">
-                                        <Card.Header as="h5">
+                            <Col>
+                                <div>
+                                    <Card className="reviewDetailCard">
+                                        <Card.Header className="reviewHeader">
                                             {review.user_name} reviewed on { moment(review.date).format("Do MMMM YYYY") }
                                         </Card.Header>
                                         <Card.Body>
-                                            <Card.Text className="reviewsText">
+                                            <Card.Text>
                                                 {review.text}
                                             </Card.Text>
-                                        </Card.Body>
-
-                                    </Card>
-                                    { user && user.googleId === review.user_id &&
+                                            { user && user.googleId === review.user_id &&
                                         <Row>
                                             <Col>
                                             <Link to={{
@@ -242,28 +244,28 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                             }}
                                             state = {{
                                                 currentReview: review
-                                            }} >
+                                            }} className="editDelete">
                                                 Edit
                                             </Link>
                                             </Col>
                                             <Col>
                                                 <Button variant="link" onClick={ () =>
                                                 {
-                                                    // TODO: IMPLEMENT DELETE BEHAVIOR
                                                     deleteReview(review.review_id, index)
                                                     
-                                                }}>
+                                                }} className="editDelete">
                                                     Delete
                                                 </Button>
                                             </Col>
                                         </Row>
                                     }
+                                        </Card.Body>
+
+                                    </Card>
                                 </div>
-                            </div>
+                            </Col>
                         )
                     })}
-                    </Col>
-                </Row>
             </Container>
         </div>
     )

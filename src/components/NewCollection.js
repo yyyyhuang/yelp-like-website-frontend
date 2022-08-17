@@ -55,7 +55,7 @@ const NewCollection = ({ user, handleSave }) => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="saveButton" onClick={ () => { handleSave(data); handleClose() } }>Save</Button>
+                    <Button className="collectionButton" onClick={ () => { handleSave(data); handleClose() } }>Save</Button>
                 </Modal.Footer>
             </Modal>
         </div>

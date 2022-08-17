@@ -181,15 +181,15 @@ function App() {
         </Navbar.Collapse>
         
         { user ? (
-            <Dropdown size="sm">
+            <Dropdown className="menu">
               <Dropdown.Toggle className="userProfile">
                 <BsPersonCircle size={25}/>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                  <Dropdown.Item href="/user">Profile</Dropdown.Item>
+                  <Dropdown.Item href="/user" className="dropLink">Profile</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item>
+                  <Dropdown.Item className="dropLink">
                     <a onClick={handleLogout}>Logout</a>
                   </Dropdown.Item>
               </Dropdown.Menu>
