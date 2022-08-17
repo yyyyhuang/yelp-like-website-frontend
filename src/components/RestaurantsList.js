@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from "react-bootstrap/Container";
 import Card from 'react-bootstrap/Card';
-// import { BsStar, BsStarFill } from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
 
 
@@ -22,27 +21,12 @@ const RestaurantsList = ({
     // useState to set state values
     const [restaurants, setRestaurants] = useState([]); // syntax const [<state_name>, <setter_name>] = useState(<initial state_value>)
     const [searchName, setSearchName] = useState("");
-    // const [searchRating, setSearchRating] = useState("");
-    // const [ratings, setRatings] = useState(["All Ratings"]);
     const [currentPage, setCurrentPage] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(0);
     const [currentSearchMode, setCurrentSearchMode] = useState("");
     const distance = [1, 2, 5];
     const [filter, setFilter] = useState(10);
 
-    // useCallback to define functions which should
-    // only be created once and will be dependencies for
-    // useEffect
-    
-    // const retrieveRatings = useCallback(() => {
-    //     RestaurantDataService.getRatings() // calls getRatings to get a l ist of possible ratings
-    //         .then(response => {
-    //             setRatings(["All Ratings"].concat(response.data))
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //         });
-    // }, []); // empty array passed as the second argument of useCallback indicates that this function does not have any dependencies
 
 
     const retrieveRestaurants = useCallback(() => {
@@ -52,28 +36,6 @@ const RestaurantsList = ({
                 setRestaurants(response.data.restaurants);
                 setCurrentPage(response.data.page);
                 setEntriesPerPage(response.data.entries_per_page);
-
-                // restaurants.map((restaurant) => {
-                //     RestaurantDataService.findPhoto(restaurant.business_id)
-                //     .then(response => {
-                //         if (response.data.address) {
-                //             restaurant = {
-                //                 ...restaurant,
-                //                 photo: response.data.address
-                //             }
-                //         } else {
-                //             restaurant = {
-                //                 ...restaurant,
-                //                 photo: '/images/RestaurantSample.jpg'
-                //             }
-                //         }
-                        
-                //         // console.log(restaurant.photo);
-                //     })
-                //     .catch(e => {
-                //         restaurant['photo'] = "./images/RestaurantSample.jpg";
-                //     })
-                // })
             })
             .catch(e => {
                 console.log("sasy hi");
@@ -97,14 +59,6 @@ const RestaurantsList = ({
         find(searchName, "name");
     }, [find, searchName]);
 
-    // const findByRating = useCallback(() => {
-    //     setCurrentSearchMode("findByRating");
-    //     if (searchRating === "All Ratings") {
-    //         retrieveRestaurants();
-    //     } else {
-    //         find(searchRating, "stars");
-    //     }
-    // }, [find, searchRating, retrieveRestaurants]);
 
     const retrieveNextPage = useCallback(() => {
         if (currentSearchMode === "findByName") {
@@ -118,10 +72,6 @@ const RestaurantsList = ({
     }, [currentSearchMode, findByName, retrieveRestaurants]);
 
 
-    // use effect to carry out side effect functionality
-    // useEffect(() => {
-    //     retrieveRatings();
-    // }, [retrieveRatings]);
 
     useEffect(() => {
         setCurrentPage(0);
@@ -138,23 +88,6 @@ const RestaurantsList = ({
         const searchName = e.target.value;
         setSearchName(searchName);
     }
-
-    // const onChangeSearchRating = e => {
-    //     const searchRating = e.target.value;
-    //     setSearchRating(searchRating);
-    // }
-
-    // const findPhotoById = (id) => {
-    //     RestaurantDataService.findPhoto(id)
-    //     .then(response => {
-    //         setPhoto(response.data);
-    //         console.log(photo.address);
-            
-    //     })
-    //     .catch(e =>{
-    //        console.log(e);
-    //     })
-    // }
 
     const handleFilterChange = event => {
         setFilter(event.target.value);
@@ -236,7 +169,6 @@ const RestaurantsList = ({
                 <div>
                 <Row xs={1} md={4} className="resRow">
                     { restaurants.map((restaurant) => {
-                        // const starList = Array.apply(1, Array(restaurant.stars));
                         return(
                             <Col key={restaurant.business_id}>
                                 <Card className="resListCard">

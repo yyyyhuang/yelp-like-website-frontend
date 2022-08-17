@@ -8,7 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { BarCharLineFill } from 'react-bootstrap-icons';
+
 
 import RestaurantsList from "./components/RestaurantsList";
 import Restaurant from "./components/Restaurant";
@@ -26,13 +26,11 @@ import './App.css';
 import { BsPersonCircle } from 'react-icons/bs';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-// const cuisines = ["Mexican", "American", "Chinese", "Italian"];
 
 function App() {
 
   const [user, setUser] = useState(null);
   const [collections, setCollections] = useState([]);
-  // const [favorites, setFavorites] = useState([])
 
   const getCollectiions = useCallback(() => {
     CollectionDataService.get(user.googleId)
@@ -202,28 +200,6 @@ function App() {
         </Container>
 
       </Navbar>
-      {/* 
-      <Filter label={"Cuisine Type"} onApply={()=> alert(selectedCuisines)} children={cuisines}>
-         <div>
-              { cuisines.map((cuis, index)=>{
-                const isSelected = selectedCuisines.includes(cuis);
-                return (
-                  <label key={index}>
-                    <input
-                        type="checkbox"
-                        checked={isSelected}
-                        onChange={()=>{handleSelect(cuis)}}
-                    />
-                    <span className="ml-2 text-base text-gray-500 font-heading">
-                      {cuis}
-                    </span>
-                    
-                  </label>
-                )
-              })}
-         </div>         
-      </Filter>
-      */}
       <Routes>
         <Route exact path={"/"} element={
           <RestaurantsList 
