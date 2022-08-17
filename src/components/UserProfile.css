@@ -3,12 +3,15 @@
     align-items: center;
 }
 
+.number {
+    color: #253b56;
+    font-size: large;
+}
 
 .userInfo {
     display: flex;
     flex-direction: row;
     background-color: black;
-    height: '200px';
 }
 
 .left-banner {
@@ -17,3 +20,33 @@
     width: "150px";
 }
 
+.mbdNav {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #253b56;
+}
+
+.info {
+    padding: 1rem;
+    font-size: 1.3em;
+    color: #8294aa;
+}
+.reviewCard {
+    width: 700px;
+    border-style: dashed;
+}
+
+.content {
+    padding: 4px 16px 16px 16px;
+}
+
+.mbdTitle {
+    margin: 12px 0px 0px 0px;
+    font-weight: bold;
+    font-size: 50;
+    color: #253b56;
+}
+
+.mbdText {
+    color: #253b56;
+}

@@ -178,10 +178,9 @@ const RestaurantsList = ({
     return (
         <div className="App">
             <Container className="main-container">
-                <Form>
-                    <Row>
-                        <Col>
-                        <Form.Group className="mb-3">
+                <div className="searchContainer">
+                        <Form>
+                        <Form.Group className="mb-3 searchBar">
                             <Form.Control
                             type="text"
                             placeholder="Search by name"
@@ -189,25 +188,26 @@ const RestaurantsList = ({
                             onChange={onChangeSearchName}
                             />
                         </Form.Group>
+                        </Form> 
+                    <div>
                         <Button
                             variant="primary"
                             type="button"
                             onClick={findByName}
+                            className="searchButton"
                         >
                             Search
                         </Button>
-                        </Col>
-                    </Row>
-                </Form> 
-            
-                <Row> 
-                    <Col>
+                    </div>
+                
+                </div>
+                    <div className="mainPage">
                         <div className="filters" aria-labelledby="filters-header">
-                            <h4 id="filters-header">
+                            <h4 className="filter-header">
                                 Distance
                             </h4>
                             
-                            <ul>
+                            <ul className="choices">
                                 {distance.map(dis => {
                                     return (
                                         <label>
@@ -217,7 +217,7 @@ const RestaurantsList = ({
                                             value={dis} 
                                             checked={ parseInt(filter) === parseInt(dis) }
                                             />
-                                        {"< " + dis + " miles"}
+                                        {" < " + dis + " miles"}
                                         </label>
                                     )
                                 })}
@@ -227,31 +227,19 @@ const RestaurantsList = ({
                                 variant="primary"
                                 type="button"
                                 onClick={resetRadioState}
+                                className="resetButton"
                                 >
                                     reset
                             </Button>
-                            </div>
-                        </Col>
-                
-                </Row>
+                        </div>
                
-                
-                <Row className="movieRow">
+                <div>
+                <Row xs={1} md={4} className="resRow">
                     { restaurants.map((restaurant) => {
                         // const starList = Array.apply(1, Array(restaurant.stars));
                         return(
                             <Col key={restaurant.business_id}>
-                                <Card className="moviesListCard">
-                                    {/* user && (
-                                        favorites.includes(restaurant.business_id) ?
-                                        <BsStarFill style={{ position: 'absolute', top: 0, left: 0}} className="star starFill" onClick={() => {
-                                        deleteFavorite(restaurant.business_id);
-                                        }} />
-                                        :
-                                        <BsStar style={{ position: 'absolute', top: 0, left: 0}} className="star starEmpty" onClick={() => {
-                                            addFavorite(restaurant.business_id);
-                                        }} />
-                                    )*/}
+                                <Card className="resListCard">
                                     <Card.Img
                                     className="smallPoster"
                                     src={restaurant.poster ? restaurant.poster : "/images/RestaurantSample.jpg"}
@@ -260,33 +248,46 @@ const RestaurantsList = ({
                                         currentTarget.src="/images/RestaurantSample.jpg";
                                     }}
                                     />
-                                    <Card.Body>
-                                        <Card.Title> {restaurant.name} </Card.Title>
+                                    <Card.Body className="resContent">
+                                        <div>
+                                        <Card.Title className="cardTitle"> {restaurant.name} </Card.Title>
                                         <Card.Text>
                                             <ReactStars
-                                                size={30}
+                                                size={20}
                                                 value={restaurant.stars}
                                                 isHalf={true}
                                                 edit={false}
                                                 />
                                         </Card.Text>
-                                        <Link to={"/restaurants/"+restaurant.business_id}>
-                                            View Restaurant Detail
+                                        </div>
+                                        <div>
+                                        <Link to={"/restaurants/"+restaurant.business_id} className="detailLink">
+                                            Show More
                                         </Link>
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
                         )
                     })}
                 </Row>
+                </div>
+                </div>
                 <br />
-                Showing page: { currentPage + 1 }.
-                <Button
-                variant="link"
-                onClick={() => { setCurrentPage(currentPage + 1)}}
-                >
-                    Get next { entriesPerPage} results
-                </Button>
+                <div className="footer">
+                    <div className="showingpage">
+                        Showing page: { currentPage + 1 }
+                    </div>
+                    <div>
+                        <Button
+                        variant="link"
+                        onClick={() => { setCurrentPage(currentPage + 1)}}
+                        className="next"
+                        >
+                            Next Page
+                        </Button>
+                </div>
+                </div>
             </Container>
         </div>
     )

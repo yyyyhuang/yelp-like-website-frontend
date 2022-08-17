@@ -41,6 +41,33 @@ img.iconLogo {
   padding-right: 5px;
 }
 
+.userProfile {
+  background-color: #253b56;
+  border: #253b56;
+  border-style: solid;
+  font-weight: bold;
+}
+
+
+
+.userProfile:hover{
+  background-color: white;
+  border-color: #253b56;
+  border-style: solid;
+  color: #253b56;
+}
+
+.userProfile:focus{
+  background-color: white;
+  border-color: #253b56;
+  border-style: solid;
+  color: #253b56;
+}
+
+.menu {
+  width: 20px;
+}
+
 /*
 .App-logo {
   height: 40vmin;

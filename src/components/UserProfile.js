@@ -17,7 +17,6 @@ const UserProfile = ({
     const getReviews = useCallback(() => {
       UserDataService.get(user.googleId)
         .then(response => {
-            console.log(response.data);
           setReviews(response.data.reviews);
         })
         .catch(e => {
@@ -40,7 +39,7 @@ const UserProfile = ({
         <MDBRow className="banner h-100">
           <MDBCol lg="9" xl="7">
             <MDBCard>
-              <div className="userInfo rounded-top text-white" style={{ backgroundColor: '#000', height: '200px' }}>
+              <div className="userInfo rounded-top text-white" style={{ backgroundColor: '#253b56', height: '200px' }}>
                 <div className="left-banner ms-4 mt-5">
                   <MDBCardImage src="/images/person.svg" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }}/>
                 </div>
@@ -67,7 +66,7 @@ const UserProfile = ({
               <MDBCardBody className="text-black p-4">
 
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <MDBCardText className="lead fw-normal mb-0">Recent Activities</MDBCardText>
+                  <MDBCardText className="mbdNav">Recent Activities</MDBCardText>
                 </div>
                 {
                 reviews.length>0 ? 
@@ -75,13 +74,16 @@ const UserProfile = ({
                   {reviews.map((review) => {
                     return (
                           <div>
-                              <MDBCard>
-                                <MDBCardText className="h5">
+                              <MDBCard className="reviewCard">
+                                <MDBCardBody className="content">
+                                <MDBCardText className="mbdTitle">
                                 You made reviews on { moment(review.date).format("Do MMMM YYYY") }
                                 </MDBCardText>
-                                <MDBCardText>
+                                <MDBCardText className="mbdText">
                                 {review.text}
                                 </MDBCardText>
+                                </MDBCardBody>
+
                               </MDBCard>
                           </div>
                   
@@ -90,7 +92,7 @@ const UserProfile = ({
                   </div> 
                 : 
                 <div>
-                    <span>You haven't write any reviews.</span>
+                    <span className="info">You haven't write any reviews.</span>
                 </div>
             }
               </MDBCardBody>
