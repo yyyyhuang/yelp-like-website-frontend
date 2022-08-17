@@ -8,8 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { BarCharLineFill } from 'react-bootstrap-icons';
 
 import RestaurantsList from "./components/RestaurantsList";
 import Restaurant from "./components/Restaurant";
@@ -24,6 +23,7 @@ import FavoritesList from './components/FavoritesList';
 
 
 import './App.css';
+import { BsPersonCircle } from 'react-icons/bs';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 // const cuisines = ["Mexican", "American", "Chinese", "Italian"];
@@ -183,12 +183,12 @@ function App() {
         </Navbar.Collapse>
         
         { user ? (
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic" className="userProfile">
-                <b className="bi bi-person-circle"></b>
+            <Dropdown size="sm">
+              <Dropdown.Toggle className="userProfile">
+                <BsPersonCircle size={25}/>
               </Dropdown.Toggle>
 
-              <Dropdown.Menu className="menu">
+              <Dropdown.Menu>
                   <Dropdown.Item href="/user">Profile</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>

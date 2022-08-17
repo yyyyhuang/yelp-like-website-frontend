@@ -91,7 +91,7 @@
     color: #253b56;
     text-decoration: none;
     width: 18rem;
-    height: 320px;
+    height: 350px;
 }
 
 .resContent {
@@ -103,7 +103,7 @@
 
 .smallPoster {
   border-radius: 8px 8px 0 0;
-  max-height: 150px;
+  height: 200px;
   overflow: hidden;
   object-fit: cover;
 }

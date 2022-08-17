@@ -23,11 +23,11 @@ body {
 }
 
 .navLink {
-  color: white;
+  color: white!important;
 }
 
 .navLink:hover {
-  color: #8294aa;
+  color: white;
   transform: scale(1.1);
 }
 
@@ -64,5 +64,5 @@ img.iconLogo {
 }
 
 .menu {
-  width: 20px;
+  width: 60px!important;
 }
