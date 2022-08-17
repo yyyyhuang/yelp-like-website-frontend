@@ -71,13 +71,11 @@ const Restaurant = ({ user, collections, handleSave }) => {
                 RestaurantDataService.findId(id)
                     .then(response => {
                         setRestaurant(response.data);
-                        // console.log(response.data.photo);
                     })
                     .catch(e => {
                         console.log(e);
                     });
         }
-        // console.log(params);
         getRestaurant(params.id)
     }, [params.id]);
 
@@ -91,7 +89,6 @@ const Restaurant = ({ user, collections, handleSave }) => {
         
         RestaurantDataService.deleteReview(data)
             .then(response => {
-                // console.log("data:"+data)
                 setRestaurant((prevState) => {
                     prevState.reviews.splice(index, 1);
                     return ({
@@ -134,9 +131,13 @@ const Restaurant = ({ user, collections, handleSave }) => {
                         <Card.Header className="head">{restaurant.name}</Card.Header>
                         <Card.Body>
                             <Card.Text className="detailInfo">
+                                <div>
                                 Address: {restaurant.address + ", "}
                                 {restaurant.city + ", "} {restaurant.state} {restaurant.postal_code + "\n"}
+                                </div>
+                                <div>
                                 Categories: {restaurant.categories}
+                                </div>
                                 <ReactStars
                                         key={restaurant.stars}
                                         size={30}
@@ -189,8 +190,6 @@ const Restaurant = ({ user, collections, handleSave }) => {
                                                                         <Card.Text className="singleCollectionName">{collection.name}</Card.Text>
                                                                         { collection.favorites.includes(params.id) ?  
                                                                         <div>
-                                                                            {/* <Button aria-disabled="true"> Save </Button> */}
-                                                                            {/* <p>Saved</p> */}
                                                                             <Button onClick={ () =>{
                                                                                 removeFromCollection(collection);
                                                                                 handleClose()

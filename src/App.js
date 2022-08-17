@@ -44,10 +44,6 @@ function App() {
 
   const handleSave = (data) => {
     CollectionDataService.createCollection(data)
-        // .then(response => {
-        //     let cur = CollectionDataService.get(user.googleId);
-        //     setMyCollections(cur);
-        // })
         .catch(e => {
             console.log(e);
         });
@@ -60,40 +56,6 @@ function App() {
     console.log("Logged out successfully.");
   }
 
-  /*
-  const [saveFavorites, setSaveFavorites] = useState(false);
-  
-  const addFavorite = (businessId) => {
-    setSaveFavorites(true);
-    setFavorites([...favorites, businessId])
-  }
-
-  const deleteFavorite = (businessId) => {
-    setSaveFavorites(true);
-    setFavorites(favorites.filter(f => f !== businessId));
-  }
-
-
-  const updateFavorites = useCallback(() => {
-    var data = {
-      _id: user.googleId,
-      favorites: favorites
-    }
-    FavoriteDataService.updateFavorites(data)
-      .catch(e => {
-        console.log(e);
-      })
-  }, [favorites, user])
-
-
-  useEffect(() => {
-    if (saveFavorites && user) {
-      updateFavorites();
-      setSaveFavorites(false);
-      //reload = false;
-    }
-  }, [user, favorites, updateFavorites, saveFavorites]);
-  */
 
   useEffect(() => {
     if (user) {
@@ -114,7 +76,6 @@ function App() {
 
   useEffect(() => {
     let loginData = JSON.parse(localStorage.getItem("login"));
-    // console.log(loginData);
     if (loginData) {
       create(loginData);
       let loginExp = loginData.exp;
@@ -207,9 +168,6 @@ function App() {
             x={lat}
             y={lng}
             collections = { collections }
-            // addFavorite={ addFavorite }
-            // deleteFavorite={ deleteFavorite }
-            // favorites={ favorites }
             />
         }
           /> 
@@ -220,9 +178,6 @@ function App() {
             y={lng}
             collections={ collections }
             handleSave = { handleSave }
-            // addFavorite={ addFavorite }
-            // deleteFavorite={ deleteFavorite }
-            // favorites={ favorites }
           />}
           />
         <Route path={"/restaurants/:id/"} element={
@@ -248,9 +203,6 @@ function App() {
             user={ user }
             x={lat}
             y={lng}
-            // collections = { collections }
-            // addFavorite={ addFavorite }
-            // deleteFavorite={ deleteFavorite }
           />
         }
         />

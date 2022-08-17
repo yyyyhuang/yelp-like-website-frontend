@@ -38,8 +38,7 @@ const RestaurantsList = ({
                 setEntriesPerPage(response.data.entries_per_page);
             })
             .catch(e => {
-                console.log("sasy hi");
-                // console.log(e);
+                console.log(e);
             });
     }, [currentPage]); // dependency currentPage which determines which set of 20 movies it will retrieve
 
@@ -64,9 +63,6 @@ const RestaurantsList = ({
         if (currentSearchMode === "findByName") {
             findByName();
         } else {
-        // } else if (currentSearchMode === "findByRating") {
-        //     findByRating();
-        // } else {
             retrieveRestaurants();
         }
     }, [currentSearchMode, findByName, retrieveRestaurants]);

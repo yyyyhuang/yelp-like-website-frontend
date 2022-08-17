@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import CollectionDataService from "../services/collections";
-import collections from "../services/collections";
 
 import "./NewCollection.css"
 

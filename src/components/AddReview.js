@@ -36,6 +36,7 @@ const AddReview = ({ user }) => {
         var data = {
             text: review,
             user_id: user.googleId,
+            name: user.name,
             business_id: params.id, // get movie id from url
             stars: stars
         }

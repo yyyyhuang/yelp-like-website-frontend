@@ -9,7 +9,7 @@ import RestaurantDataService from "../services/restaurants";
 
 import CollectionDataService from "../services/collections";
 import "./CollectionsList.css";
-import CardHeader from 'react-bootstrap/esm/CardHeader';
+
 
 const CollectionsList = ({
     user,

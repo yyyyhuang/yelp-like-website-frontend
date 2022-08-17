@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./filter.css";
-import FilterModal from "./FilterModal";
+
 
 export default function Filter({ children, onApply, label }) {
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(undefined);
   const buttonRef = useRef(undefined);
-  // const modalRef = useRef(undefined);
+
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -15,8 +15,7 @@ export default function Filter({ children, onApply, label }) {
         dropdownRef.current && dropdownRef.current.contains(event.target);
       const isButtonClick =
         buttonRef.current && buttonRef.current.contains(event.target);
-      // const isModalClick =
-        // modalRef.current && modalRef.current.contains(event.target);
+
  
       if (isDropdownClick || isButtonClick) {
         // If the ref is not defined or the user clicked on the menu, we don’t do anything.
@@ -57,11 +56,6 @@ export default function Filter({ children, onApply, label }) {
             </div>
         </div>
     )}
-    {/* {isOpen && (
-        <FilterModal ref={modalRef} onApply={handleApply} onDismiss={()=> setIsOpen(false)}>
-            {children}
-        </FilterModal>
-    )} */}
     
     </div>
   );
