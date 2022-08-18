@@ -44,7 +44,6 @@ https://github.ccs.neu.edu/NEU-CS5610-SU22/2--Milk--backend
         - Login users can add/remove the restaurant to collections
     - Collection Page:
         - Show collections for login users
-        - User can edit/delete collections
     - Favorite Page:
         - Show saved restaurants for a collection
     - User Profile Page:
