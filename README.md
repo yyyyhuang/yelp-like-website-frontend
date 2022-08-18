@@ -32,11 +32,11 @@ https://github.ccs.neu.edu/NEU-CS5610-SU22/2--Milk--backend
     <img width="1440" alt="third party" src="/screenshot/third_party.jpg">
 
 2. Implemented functionalities:
-    - Landing Page:
+    - Landing Page: **(NOTE: Please allow location access for browser)**
         - Google Login and Logout
         - Show Collections, Favorites, and Profile pages for login users
         - Search bar to search by name
-        - Filter restaurants by distance based on user's current location
+        - Filter restaurants by distance based on user's current location **(NOTE: The restaurants in our database do not cover all areas in US. Result might be blank due to limited data)**
     - Restaurant Detail Page:
         - Show restaurant details, address, categories, and a dynamic image gallery
         - Show sorted reviews by date
