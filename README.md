@@ -84,7 +84,7 @@ https://github.ccs.neu.edu/NEU-CS5610-SU22/2--Milk--backend
     Collection Detail/Favorite List Page:
     <img width="1440" alt="favorites" src="/screenshot/favorites.jpg">
     Add Review Page:
-    
+    <img width="1440" alt="add_review" src="/screenshot/add_review.jpg">
 
 
 **Iteration 2**
