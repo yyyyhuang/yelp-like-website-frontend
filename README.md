@@ -4,6 +4,7 @@
 
 **Links**
 The link to the deployed frontend application
+
 https://restaurant-recommend-frontend.herokuapp.com/
 
 The link to the deployed backend application
@@ -51,13 +52,13 @@ https://github.ccs.neu.edu/NEU-CS5610-SU22/2--Milk--backend
 
 3. Dependencies and Node version:
 
-Run npm install to install all the dependencies
+    Run npm install to install all the dependencies
 
-Frontend:
-node version: v17.6.0
+    Frontend:
+    node version: v17.6.0
 
-Backend:
-node version: v17.6.0
+    Backend:
+    node version: v17.6.0
 
 4. Members' contribution
     - Yingjie Huang:
@@ -73,11 +74,17 @@ node version: v17.6.0
 
 5. Screenshots
     Landing page:
+    <img width="1440" alt="landing_page" src="/screenshot/landing_page.jpg">
     Detail Page:
+    <img width="1440" alt="detail_page" src="/screenshot/detail_page.jpg">
     User Profile Page:
+    <img width="1440" alt="profile" src="/screenshot/profile.jpg">
     Collections Page:
+    <img width="1440" alt="collections" src="/screenshot/collections.jpg">
     Collection Detail/Favorite List Page:
+    <img width="1440" alt="favorites" src="/screenshot/favorites.jpg">
     Add Review Page:
+    
 
 
 **Iteration 2**
